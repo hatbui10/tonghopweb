@@ -145,26 +145,18 @@
     .section-heading h2 { margin: 0; font-size: 11.5px; letter-spacing: -.015em; }
     .section-heading p { display: none; }
     .section-count { margin-left: auto; padding: 3px 6px; border: 1px solid #e9edf4; border-radius: 999px; color: #758198; background: #fff; font-size: 8px; font-weight: 750; white-space: nowrap; }
-    .repo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 12px; animation: cards-in .2s ease-out; }
+    .repo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 7px; margin: 10px; animation: cards-in .2s ease-out; }
     @keyframes cards-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
     .repo-card {
-      min-width: 0; min-height: 168px; padding: 16px; display: flex; flex-direction: column;
-      border: 1px solid #e7ebf2; border-radius: 16px; background: white; color: inherit;
-      text-decoration: none; box-shadow: 0 4px 14px rgba(22,39,73,.025); transition: .2s ease;
+      min-width: 0; min-height: 38px; padding: 7px 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      border: 1px solid #e8ecf4; border-radius: 11px; background: linear-gradient(135deg, #fff, #fbfcff); color: #293954;
+      text-decoration: none; box-shadow: 0 2px 7px rgba(22,39,73,.025); font-size: 11px; font-weight: 700; transition: .16s ease;
     }
-    .repo-card:hover { border-color: #c7d3e8; box-shadow: 0 12px 26px rgba(22,39,73,.09); transform: translateY(-3px); }
-    .card-top { display: flex; align-items: center; justify-content: space-between; }
-    .repo-icon {
-      width: 31px; height: 31px; display: grid; place-items: center; border-radius: 10px;
-      background: var(--tint, #edf2ff); color: var(--accent, #4778f5); font-size: 12px; font-weight: 850; letter-spacing: -.04em;
-    }
-    .external { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 8px; color: #9aa5b7; font-size: 16px; transition: .2s; }
-    .repo-card:hover .external { color: var(--blue); background: #f0f4ff; }
-    .repo-card h3 { margin: 13px 0 5px; overflow-wrap: anywhere; font-size: 14px; line-height: 1.3; letter-spacing: -.015em; }
-    .repo-card p { margin: 0; color: #6d7990; font-size: 11px; line-height: 1.55; }
-    .card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 14px; }
-    .repo-owner { overflow: hidden; color: #a0aabc; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
-    .repo-open { color: #5774bd; font-size: 10px; font-weight: 750; white-space: nowrap; }
+    .repo-card:hover { border-color: #c8d5ef; background: #f6f8ff; box-shadow: 0 5px 13px rgba(22,39,73,.08); transform: translateY(-1px); }
+    .repo-card:focus-visible { outline: 3px solid rgba(71,120,245,.23); outline-offset: 2px; }
+    .repo-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .external { width: 20px; height: 20px; flex: none; display: grid; place-items: center; border-radius: 7px; color: #97a3b7; font-size: 13px; line-height: 1; transition: .16s; }
+    .repo-card:hover .external { color: var(--blue); background: #eaf0ff; }
     .empty-state { display: none; margin: 28px 0; padding: 34px 20px; border: 1px dashed #ccd5e3; border-radius: 16px; color: var(--muted); background: rgba(255,255,255,.6); text-align: center; font-size: 13px; }
     .footer { display: flex; justify-content: space-between; gap: 18px; padding: 29px 2px 38px; margin-top: 37px; border-top: 1px solid #e2e7ef; color: #8994a7; font-size: 10px; line-height: 1.6; }
     .footer a { color: #65748f; text-decoration: none; }
@@ -194,8 +186,8 @@
       .category-accordions { grid-template-columns: 1fr; gap: 8px; margin-top: 18px; }
       .category-section[open] { grid-column: auto; }
       .section-heading { min-height: 49px; padding: 7px 10px; }
-      .repo-grid { grid-template-columns: 1fr; gap: 9px; }
-      .repo-card { min-height: 150px; }
+      .repo-grid { grid-template-columns: 1fr; gap: 6px; margin: 9px; }
+      .repo-card { min-height: 42px; padding: 9px 11px; border-radius: 12px; font-size: 12px; }
       .section-heading h2 { font-size: 11.5px; }
       .footer { flex-direction: column; gap: 8px; }
     }
@@ -203,6 +195,121 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition-duration: .01ms !important; }
     }
+
+
+    /* Dark neon theme */
+    :root {
+      color-scheme: dark;
+      --ink: #e8f1ff;
+      --muted: #98a9c4;
+      --line: #26364f;
+      --paper: #0d1728;
+      --wash: #070b14;
+      --navy: #091222;
+      --teal: #67f7e4;
+      --blue: #6e9bff;
+      --shadow: 0 16px 42px rgba(0, 0, 0, .34);
+    }
+    ::selection { color: #07111c; background: rgba(103,247,228,.72); }
+    body {
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 82% 4%, rgba(101, 76, 255, .14), transparent 31%),
+        radial-gradient(ellipse at 4% 40%, rgba(36, 222, 205, .075), transparent 30%),
+        #070b14;
+    }
+    .brand-mark { box-shadow: 0 0 18px rgba(103,247,228,.18), 0 5px 14px rgba(0,0,0,.3); }
+    .profile-link {
+      border-color: #2a3955; background: rgba(14, 23, 40, .82); color: #d9e7ff;
+      box-shadow: 0 4px 14px rgba(0,0,0,.18);
+    }
+    .profile-link:hover { border-color: rgba(103,247,228,.65); color: #8ff9eb; box-shadow: 0 0 18px rgba(62,240,219,.15); }
+    .hero {
+      border: 1px solid rgba(103,247,228,.19);
+      background: linear-gradient(135deg, #091222 2%, #0d1730 58%, #101a34 100%);
+      box-shadow: 0 22px 55px rgba(0,0,0,.4), 0 0 38px rgba(53,227,215,.07);
+    }
+    .hero::before { border-color: rgba(105,188,255,.18); }
+    .hero::after { background: radial-gradient(circle, rgba(56,220,187,.28), rgba(102,81,255,.08) 36%, rgba(56,220,187,0) 70%); }
+    .stat { border-color: rgba(176,202,243,.18); background: rgba(255,255,255,.045); }
+    .stat strong { text-shadow: 0 0 16px rgba(103,247,228,.15); }
+    .toolbar {
+      border-color: #23334d; background: rgba(12, 20, 36, .94);
+      box-shadow: 0 15px 38px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.025);
+    }
+    #search { border-color: #2a3b58; background: #0a1322; color: #edf5ff; }
+    #search::placeholder { color: #7f90aa; }
+    #search:focus { border-color: #5cebdc; background: #0c1728; box-shadow: 0 0 0 3px rgba(74,239,221,.12), 0 0 18px rgba(74,239,221,.08); }
+    .result-count { color: #a1b0c9; }
+    .result-count strong { color: #eaf6ff; }
+    .expand-all-btn {
+      border-color: #2c3c59; background: linear-gradient(135deg, #101c31, #10172a);
+      color: #c2d0e8; box-shadow: inset 0 1px rgba(255,255,255,.035), 0 4px 12px rgba(0,0,0,.18);
+    }
+    .expand-all-btn:hover { border-color: rgba(103,247,228,.7); color: #8ef8ea; background: #102333; box-shadow: 0 0 0 1px rgba(103,247,228,.08), 0 0 20px rgba(61,232,215,.15); }
+    .expand-all-btn[aria-expanded="true"] { border-color: rgba(103,247,228,.48); background: linear-gradient(135deg, #102b36, #151c39); color: #8ff9eb; box-shadow: 0 0 16px rgba(69,235,218,.11); }
+    .expand-all-icon { background: rgba(106,91,255,.17); color: #a99bff; box-shadow: inset 0 0 10px rgba(131,113,255,.08); }
+    .expand-all-count { background: #1b2940; color: #adbed9; }
+    .filter-tip { color: #8192ad; }
+    .category-section {
+      border-color: #23334c; background: #0c1525;
+      box-shadow: 0 5px 18px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.018);
+    }
+    .category-section:not([open]):hover {
+      border-color: rgba(103,247,228,.35); background: #0e1a2a;
+      box-shadow: 0 0 16px rgba(54,231,215,.08), 0 8px 20px rgba(0,0,0,.3);
+    }
+    .category-section[open] {
+      border-color: rgba(94,226,219,.45);
+      box-shadow: 0 0 0 1px rgba(94,226,219,.08), 0 0 24px rgba(44,213,207,.09), 0 12px 32px rgba(0,0,0,.32);
+    }
+    .section-heading { color: #e8f1ff; background: linear-gradient(110deg, #0e192b, #111a2d); }
+    .category-section:not([open]) > .section-heading:hover { background: linear-gradient(110deg, #102235, #171a33); }
+    .category-section[open] > .section-heading { border-bottom-color: #24364e; background: linear-gradient(110deg, #102330, #151a31); }
+    .category-section > .section-heading::after { background: #18263b; color: #91a4c2; }
+    .category-section[open] > .section-heading::after { background: rgba(78,239,222,.12); color: #72f5e4; }
+    .section-heading:focus-visible { outline-color: rgba(83,244,225,.55); }
+    .section-icon {
+      border: 1px solid rgba(132,177,230,.14);
+      background: linear-gradient(145deg, rgba(65,102,151,.28), rgba(100,78,177,.19));
+      box-shadow: inset 0 0 12px rgba(117,157,255,.06);
+    }
+    .section-heading h2 { color: #e8f2ff; }
+    .section-count { border-color: #2a3a54; background: #111e32; color: #aabbd5; }
+    .repo-card {
+      position: relative; isolation: isolate; overflow: hidden;
+      border-color: #263a56; background: linear-gradient(135deg, #101d31, #101729);
+      color: #dceaff; box-shadow: inset 0 1px rgba(255,255,255,.025), 0 3px 10px rgba(0,0,0,.2);
+    }
+    .repo-card::before {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+      background: linear-gradient(105deg, transparent 18%, rgba(73,247,226,.1) 47%, rgba(140,105,255,.08) 58%, transparent 82%);
+      transform: translateX(-110%); transition: transform .55s ease, opacity .2s ease;
+    }
+    .repo-card:hover {
+      border-color: rgba(94,247,224,.78); background: linear-gradient(135deg, #102638, #171a35);
+      color: #f1fbff; box-shadow: 0 0 0 1px rgba(92,244,224,.12), 0 0 19px rgba(59,236,215,.17), 0 7px 18px rgba(0,0,0,.34);
+      transform: translateY(-2px);
+    }
+    .repo-card:hover::before { opacity: 1; transform: translateX(110%); }
+    .repo-card:focus-visible { outline-color: rgba(90,246,225,.7); box-shadow: 0 0 0 3px rgba(90,246,225,.15), 0 0 20px rgba(90,246,225,.2); }
+    .repo-label, .external { position: relative; z-index: 1; }
+    .repo-label { color: inherit; text-shadow: 0 0 10px rgba(100,236,255,.04); }
+    .external { background: #17253a; color: #83e9eb; }
+    .repo-card:hover .external { color: #91fff0; background: rgba(50,226,214,.15); box-shadow: 0 0 12px rgba(74,239,221,.14); }
+    .empty-state { border-color: #32445d; background: rgba(14,24,42,.75); color: #9dafc9; }
+    .footer { border-top-color: #223149; color: #7f90aa; }
+    .footer a { color: #9aaccc; }
+    .footer a:hover { color: #77f5e4; text-shadow: 0 0 12px rgba(103,247,228,.35); }
+    @media (max-width: 560px) {
+      .profile-link { border-color: #2a3955; background: rgba(14,23,40,.9); }
+      .repo-card:hover { transform: translateY(-1px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .repo-card::before { transition: none; }
+      .repo-card:hover::before { transform: none; }
+    }
+
   </style>
 </head>
 <body>
@@ -257,44 +364,57 @@
             <span class="section-count"><span class="visible-count">13</span> dự án</span>
           </summary>
           <div class="repo-grid">
-            <a class="repo-card" href="https://github.com/hatubiu10/danhsachday168" target="_blank" rel="noopener noreferrer" data-category="education" data-search="danhsachday168 danh sách dạy phân công giảng dạy">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">D</span><span class="external" aria-hidden="true">↗</span></div><h3>danhsachday168</h3><p>Danh sách dạy hoặc phân công giảng dạy.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/danhsachday168" target="_blank" rel="noopener noreferrer" data-category="education" data-search="danhsachday168 danh sách dạy phân công giảng dạy" aria-label="Mở danhsachday168">
+              <span class="repo-label">danhsachday168</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/lichnghihavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="lichnghihavi lịch nghỉ Havi">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">L</span><span class="external" aria-hidden="true">↗</span></div><h3>lichnghihavi</h3><p>Lịch nghỉ của Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/lichnghihavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="lichnghihavi lịch nghỉ Havi" aria-label="Mở lichnghihavi">
+              <span class="repo-label">lichnghihavi</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/danhgiahocsinhhavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="danhgiahocsinhhavi đánh giá học sinh Havi">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">ĐG</span><span class="external" aria-hidden="true">↗</span></div><h3>danhgiahocsinhhavi</h3><p>Công cụ đánh giá học sinh Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/danhgiahocsinhhavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="danhgiahocsinhhavi đánh giá học sinh Havi" aria-label="Mở danhgiahocsinhhavi">
+              <span class="repo-label">danhgiahocsinhhavi</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/diemdanh" target="_blank" rel="noopener noreferrer" data-category="education" data-search="diemdanh điểm danh">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">ĐD</span><span class="external" aria-hidden="true">↗</span></div><h3>diemdanh</h3><p>Ứng dụng điểm danh.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/diemdanh" target="_blank" rel="noopener noreferrer" data-category="education" data-search="diemdanh điểm danh" aria-label="Mở diemdanh">
+              <span class="repo-label">diemdanh</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/tinhluonghavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="tinhluonghavi tính lương Havi">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">TL</span><span class="external" aria-hidden="true">↗</span></div><h3>tinhluonghavi</h3><p>Công cụ tính lương cho Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/tinhluonghavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="tinhluonghavi tính lương Havi" aria-label="Mở tinhluonghavi">
+              <span class="repo-label">tinhluonghavi</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/diemdanhchung" target="_blank" rel="noopener noreferrer" data-category="education" data-search="diemdanhchung điểm danh chung">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">ĐC</span><span class="external" aria-hidden="true">↗</span></div><h3>diemdanhchung</h3><p>Công cụ điểm danh chung.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/diemdanhchung" target="_blank" rel="noopener noreferrer" data-category="education" data-search="diemdanhchung điểm danh chung" aria-label="Mở diemdanhchung">
+              <span class="repo-label">diemdanhchung</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/dsgiaovien" target="_blank" rel="noopener noreferrer" data-category="education" data-search="dsgiaovien danh sách giáo viên">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">GV</span><span class="external" aria-hidden="true">↗</span></div><h3>dsgiaovien</h3><p>Danh sách giáo viên.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/dsgiaovien" target="_blank" rel="noopener noreferrer" data-category="education" data-search="dsgiaovien danh sách giáo viên" aria-label="Mở dsgiaovien">
+              <span class="repo-label">dsgiaovien</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/dieuhanhhavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="dieuhanhhavi điều hành Havi">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">ĐH</span><span class="external" aria-hidden="true">↗</span></div><h3>dieuhanhhavi</h3><p>Công cụ điều hành Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/dieuhanhhavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="dieuhanhhavi điều hành Havi" aria-label="Mở dieuhanhhavi">
+              <span class="repo-label">dieuhanhhavi</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/lophoctienganhhavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="lophoctienganhhavi lớp học tiếng Anh Havi">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">EN</span><span class="external" aria-hidden="true">↗</span></div><h3>lophoctienganhhavi</h3><p>Lớp học tiếng Anh Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/lophoctienganhhavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="lophoctienganhhavi lớp học tiếng Anh Havi" aria-label="Mở lophoctienganhhavi">
+              <span class="repo-label">lophoctienganhhavi</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/xeplich" target="_blank" rel="noopener noreferrer" data-category="education" data-search="xeplich xếp lịch thời khóa biểu">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">XL</span><span class="external" aria-hidden="true">↗</span></div><h3>xeplich</h3><p>Công cụ xếp lịch.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/xeplich" target="_blank" rel="noopener noreferrer" data-category="education" data-search="xeplich xếp lịch thời khóa biểu" aria-label="Mở xeplich">
+              <span class="repo-label">xeplich</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/taofilelophoc" target="_blank" rel="noopener noreferrer" data-category="education" data-search="taofilelophoc tạo tệp lớp học">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">L</span><span class="external" aria-hidden="true">↗</span></div><h3>taofilelophoc</h3><p>Tiện ích tạo tệp cho lớp học.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/taofilelophoc" target="_blank" rel="noopener noreferrer" data-category="education" data-search="taofilelophoc tạo tệp lớp học" aria-label="Mở taofilelophoc">
+              <span class="repo-label">taofilelophoc</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/danhgiahocsinhhavi-test" target="_blank" rel="noopener noreferrer" data-category="education" data-search="danhgiahocsinhhavi-test đánh giá học sinh Havi thử nghiệm">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">TEST</span><span class="external" aria-hidden="true">↗</span></div><h3>danhgiahocsinhhavi-test</h3><p>Bản thử nghiệm công cụ đánh giá học sinh Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/danhgiahocsinhhavi-test" target="_blank" rel="noopener noreferrer" data-category="education" data-search="danhgiahocsinhhavi-test đánh giá học sinh Havi thử nghiệm" aria-label="Mở danhgiahocsinhhavi-test">
+              <span class="repo-label">danhgiahocsinhhavi-test</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/dslinklop" target="_blank" rel="noopener noreferrer" data-category="education" data-search="dslinklop danh sách link lớp">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">LINK</span><span class="external" aria-hidden="true">↗</span></div><h3>dslinklop</h3><p>Danh sách liên kết lớp học.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/dslinklop" target="_blank" rel="noopener noreferrer" data-category="education" data-search="dslinklop danh sách link lớp" aria-label="Mở dslinklop">
+              <span class="repo-label">dslinklop</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
           </div>
         </details>
@@ -305,62 +425,81 @@
             <span class="section-count"><span class="visible-count">19</span> dự án</span>
           </summary>
           <div class="repo-grid">
-            <a class="repo-card" href="https://github.com/hatubiu10/csv" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="csv dữ liệu bảng tính">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">CSV</span><span class="external" aria-hidden="true">↗</span></div><h3>csv</h3><p>Tiện ích liên quan đến tệp hoặc dữ liệu CSV.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/csv" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="csv dữ liệu bảng tính" aria-label="Mở csv">
+              <span class="repo-label">csv</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/danhsachtool" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="danhsachtool danh sách công cụ tools">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">DS</span><span class="external" aria-hidden="true">↗</span></div><h3>danhsachtool</h3><p>Danh sách các công cụ.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/danhsachtool" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="danhsachtool danh sách công cụ tools" aria-label="Mở danhsachtool">
+              <span class="repo-label">danhsachtool</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/htmltool" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="htmltool công cụ HTML web">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">HT</span><span class="external" aria-hidden="true">↗</span></div><h3>htmltool</h3><p>Công cụ hỗ trợ HTML.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/htmltool" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="htmltool công cụ HTML web" aria-label="Mở htmltool">
+              <span class="repo-label">htmltool</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/toolcode" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="toolcode công cụ lập trình mã nguồn code">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">&lt;/&gt;</span><span class="external" aria-hidden="true">↗</span></div><h3>toolcode</h3><p>Công cụ hỗ trợ viết hoặc xử lý mã.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/toolcode" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="toolcode công cụ lập trình mã nguồn code" aria-label="Mở toolcode">
+              <span class="repo-label">toolcode</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/copy" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="copy sao chép tiện ích">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">CP</span><span class="external" aria-hidden="true">↗</span></div><h3>copy</h3><p>Tiện ích sao chép.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/copy" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="copy sao chép tiện ích" aria-label="Mở copy">
+              <span class="repo-label">copy</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/vscodemini" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="vscodemini VS Code mini trình soạn thảo code">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">VS</span><span class="external" aria-hidden="true">↗</span></div><h3>vscodemini</h3><p>Trình soạn thảo hoặc tiện ích kiểu VS Code mini.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/vscodemini" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="vscodemini VS Code mini trình soạn thảo code" aria-label="Mở vscodemini">
+              <span class="repo-label">vscodemini</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/cautruchtml" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="cautruchtml cấu trúc HTML web">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">HTML</span><span class="external" aria-hidden="true">↗</span></div><h3>cautruchtml</h3><p>Tài liệu hoặc tiện ích về cấu trúc HTML.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/cautruchtml" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="cautruchtml cấu trúc HTML web" aria-label="Mở cautruchtml">
+              <span class="repo-label">cautruchtml</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/filenoi" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="filenoi file nối ghép tệp">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">FN</span><span class="external" aria-hidden="true">↗</span></div><h3>filenoi</h3><p>Tiện ích nối hoặc ghép tệp (suy đoán theo tên).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/filenoi" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="filenoi file nối ghép tệp" aria-label="Mở filenoi">
+              <span class="repo-label">filenoi</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/baomatfile" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="baomatfile bảo mật bảo vệ file tệp">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">BM</span><span class="external" aria-hidden="true">↗</span></div><h3>baomatfile</h3><p>Công cụ bảo vệ hoặc bảo mật tệp.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/baomatfile" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="baomatfile bảo mật bảo vệ file tệp" aria-label="Mở baomatfile">
+              <span class="repo-label">baomatfile</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/toolexceltensdt" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="toolexceltensdt Excel tên số điện thoại">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">XL</span><span class="external" aria-hidden="true">↗</span></div><h3>toolexceltensdt</h3><p>Tiện ích Excel liên quan đến tên và số điện thoại.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/toolexceltensdt" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="toolexceltensdt Excel tên số điện thoại" aria-label="Mở toolexceltensdt">
+              <span class="repo-label">toolexceltensdt</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/tooltonghop" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="tooltonghop tổng hợp tools">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">TH</span><span class="external" aria-hidden="true">↗</span></div><h3>tooltonghop</h3><p>Trang hoặc bộ tổng hợp các công cụ.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/tooltonghop" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="tooltonghop tổng hợp tools" aria-label="Mở tooltonghop">
+              <span class="repo-label">tooltonghop</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/taothu" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="taothu tạo thư viết thư">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">THƯ</span><span class="external" aria-hidden="true">↗</span></div><h3>taothu</h3><p>Công cụ tạo thư hoặc nội dung thư (theo tên).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/taothu" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="taothu tạo thư viết thư" aria-label="Mở taothu">
+              <span class="repo-label">taothu</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/aitonghop" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="aitonghop trí tuệ nhân tạo">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">AI</span><span class="external" aria-hidden="true">↗</span></div><h3>aitonghop</h3><p>Dự án tổng hợp liên quan đến AI.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/aitonghop" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="aitonghop trí tuệ nhân tạo" aria-label="Mở aitonghop">
+              <span class="repo-label">aitonghop</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/taojsonmonan" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="taojsonmonan tạo dữ liệu món ăn">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">JSON</span><span class="external" aria-hidden="true">↗</span></div><h3>taojsonmonan</h3><p>Tạo dữ liệu JSON cho món ăn.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/taojsonmonan" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="taojsonmonan tạo dữ liệu món ăn" aria-label="Mở taojsonmonan">
+              <span class="repo-label">taojsonmonan</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/taotaikhoan" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="taotaikhoan tạo tài khoản">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">TK</span><span class="external" aria-hidden="true">↗</span></div><h3>taotaikhoan</h3><p>Tiện ích tạo tài khoản.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/taotaikhoan" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="taotaikhoan tạo tài khoản" aria-label="Mở taotaikhoan">
+              <span class="repo-label">taotaikhoan</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/huongdancss" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="huongdancss hướng dẫn học CSS web stylesheet">
-              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">CSS</span><span class="external" aria-hidden="true">↗</span></div><h3>huongdancss</h3><p>Hướng dẫn hoặc tài liệu học CSS (theo tên repository).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/huongdancss" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="huongdancss hướng dẫn học CSS web stylesheet" aria-label="Mở huongdancss">
+              <span class="repo-label">huongdancss</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://hatbui10.github.io/200css/" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="200css 200 CSS học CSS tài liệu mẫu">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">CSS</span><span class="external" aria-hidden="true">↗</span></div><h3>200css</h3><p>Tài liệu hoặc bộ sưu tập nội dung CSS (theo tên đường dẫn).</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
+            <a class="repo-card" href="https://hatbui10.github.io/200css/" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="200css 200 CSS học CSS tài liệu mẫu" aria-label="Mở 200css">
+              <span class="repo-label">200css</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://hatbui10.github.io/tooltaoweb/" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="tooltaoweb công cụ tạo web website">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">WEB</span><span class="external" aria-hidden="true">↗</span></div><h3>tooltaoweb</h3><p>Công cụ tạo website.</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
+            <a class="repo-card" href="https://hatbui10.github.io/tooltaoweb/" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="tooltaoweb công cụ tạo web website" aria-label="Mở tooltaoweb">
+              <span class="repo-label">tooltaoweb</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://hatbui10.github.io/mahoahtml1/" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="mahoahtml1 mã hóa HTML encode">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">HTML</span><span class="external" aria-hidden="true">↗</span></div><h3>mahoahtml1</h3><p>Công cụ mã hóa HTML (theo tên đường dẫn).</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
+            <a class="repo-card" href="https://hatbui10.github.io/mahoahtml1/" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="mahoahtml1 mã hóa HTML encode" aria-label="Mở mahoahtml1">
+              <span class="repo-label">mahoahtml1</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
           </div>
         </details>
@@ -371,23 +510,29 @@
             <span class="section-count"><span class="visible-count">6</span> dự án</span>
           </summary>
           <div class="repo-grid">
-            <a class="repo-card" href="https://github.com/hatubiu10/fontchudep" target="_blank" rel="noopener noreferrer" data-category="design" data-search="fontchudep font chữ đẹp kiểu chữ">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">Aa</span><span class="external" aria-hidden="true">↗</span></div><h3>fontchudep</h3><p>Dự án về font chữ đẹp hoặc cách trình bày chữ.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/fontchudep" target="_blank" rel="noopener noreferrer" data-category="design" data-search="fontchudep font chữ đẹp kiểu chữ" aria-label="Mở fontchudep">
+              <span class="repo-label">fontchudep</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/vongtron" target="_blank" rel="noopener noreferrer" data-category="design" data-search="vongtron vòng tròn hình tròn">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">◯</span><span class="external" aria-hidden="true">↗</span></div><h3>vongtron</h3><p>Tiện ích hoặc nội dung liên quan đến hình tròn.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/vongtron" target="_blank" rel="noopener noreferrer" data-category="design" data-search="vongtron vòng tròn hình tròn" aria-label="Mở vongtron">
+              <span class="repo-label">vongtron</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/tachtheomau" target="_blank" rel="noopener noreferrer" data-category="design" data-search="tachtheomau tách theo màu">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">MÀU</span><span class="external" aria-hidden="true">↗</span></div><h3>tachtheomau</h3><p>Công cụ tách nội dung theo màu (theo tên repository).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/tachtheomau" target="_blank" rel="noopener noreferrer" data-category="design" data-search="tachtheomau tách theo màu" aria-label="Mở tachtheomau">
+              <span class="repo-label">tachtheomau</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/anhcomien" target="_blank" rel="noopener noreferrer" data-category="design" data-search="anhcomien ảnh hình ảnh">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">ẢNH</span><span class="external" aria-hidden="true">↗</span></div><h3>anhcomien</h3><p>Dự án liên quan đến hình ảnh; chức năng chưa rõ theo tên.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/anhcomien" target="_blank" rel="noopener noreferrer" data-category="design" data-search="anhcomien ảnh hình ảnh" aria-label="Mở anhcomien">
+              <span class="repo-label">anhcomien</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/tachnenanh34" target="_blank" rel="noopener noreferrer" data-category="design" data-search="tachnenanh34 tách nền ảnh xóa nền">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">PNG</span><span class="external" aria-hidden="true">↗</span></div><h3>tachnenanh34</h3><p>Công cụ tách hoặc xóa nền ảnh (theo tên).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/tachnenanh34" target="_blank" rel="noopener noreferrer" data-category="design" data-search="tachnenanh34 tách nền ảnh xóa nền" aria-label="Mở tachnenanh34">
+              <span class="repo-label">tachnenanh34</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/longvongtron" target="_blank" rel="noopener noreferrer" data-category="design" data-search="longvongtron vòng tròn hình dạng">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">LV</span><span class="external" aria-hidden="true">↗</span></div><h3>longvongtron</h3><p>Dự án liên quan đến vòng tròn hoặc hình tròn (suy đoán theo tên).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/longvongtron" target="_blank" rel="noopener noreferrer" data-category="design" data-search="longvongtron vòng tròn hình dạng" aria-label="Mở longvongtron">
+              <span class="repo-label">longvongtron</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
           </div>
         </details>
@@ -398,23 +543,29 @@
             <span class="section-count"><span class="visible-count">6</span> dự án</span>
           </summary>
           <div class="repo-grid">
-            <a class="repo-card" href="https://github.com/hatubiu10/khonuoclavie" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="khonuoclavie kho nước Lavie quản lý kho">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e5f8f4;--accent:#169b81">K</span><span class="external" aria-hidden="true">↗</span></div><h3>khonuoclavie</h3><p>Dự án quản lý kho nước Lavie.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/khonuoclavie" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="khonuoclavie kho nước Lavie quản lý kho" aria-label="Mở khonuoclavie">
+              <span class="repo-label">khonuoclavie</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/datmuanuoclavie" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="datmuanuoclavie đặt mua nước Lavie">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e5f8f4;--accent:#169b81">ĐM</span><span class="external" aria-hidden="true">↗</span></div><h3>datmuanuoclavie</h3><p>Ứng dụng đặt mua nước Lavie.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/datmuanuoclavie" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="datmuanuoclavie đặt mua nước Lavie" aria-label="Mở datmuanuoclavie">
+              <span class="repo-label">datmuanuoclavie</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/laviehungliengoikh" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="laviehungliengoikh Lavie Hùng Liên gọi khách">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e5f8f4;--accent:#169b81">LH</span><span class="external" aria-hidden="true">↗</span></div><h3>laviehungliengoikh</h3><p>Dự án liên quan đến Lavie Hùng Liên (theo tên repository).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/laviehungliengoikh" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="laviehungliengoikh Lavie Hùng Liên gọi khách" aria-label="Mở laviehungliengoikh">
+              <span class="repo-label">laviehungliengoikh</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/inhoadonlavie" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="inhoadonlavie in hóa đơn Lavie">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e5f8f4;--accent:#169b81">HD</span><span class="external" aria-hidden="true">↗</span></div><h3>inhoadonlavie</h3><p>Công cụ in hóa đơn liên quan đến Lavie.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/inhoadonlavie" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="inhoadonlavie in hóa đơn Lavie" aria-label="Mở inhoadonlavie">
+              <span class="repo-label">inhoadonlavie</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/khonuoclaviehunglien" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="khonuoclaviehunglien kho nước Lavie Hùng Liên">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e5f8f4;--accent:#169b81">KH</span><span class="external" aria-hidden="true">↗</span></div><h3>khonuoclaviehunglien</h3><p>Dự án kho nước Lavie Hùng Liên (theo tên repository).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/khonuoclaviehunglien" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="khonuoclaviehunglien kho nước Lavie Hùng Liên" aria-label="Mở khonuoclaviehunglien">
+              <span class="repo-label">khonuoclaviehunglien</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://hatbui10.github.io/sonhaplavie/" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="sonhaplavie sổ nhập liệu nhập hàng Lavie">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">SL</span><span class="external" aria-hidden="true">↗</span></div><h3>sonhaplavie</h3><p>Sổ nhập liệu hoặc quản lý nhập hàng Lavie (suy đoán theo tên).</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
+            <a class="repo-card" href="https://hatbui10.github.io/sonhaplavie/" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="sonhaplavie sổ nhập liệu nhập hàng Lavie" aria-label="Mở sonhaplavie">
+              <span class="repo-label">sonhaplavie</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
           </div>
         </details>
@@ -425,17 +576,21 @@
             <span class="section-count"><span class="visible-count">4</span> dự án</span>
           </summary>
           <div class="repo-grid">
-            <a class="repo-card" href="https://github.com/hatubiu10/play168" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="play168 ứng dụng trò chơi giải trí">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff0e6;--accent:#e38b37">P</span><span class="external" aria-hidden="true">↗</span></div><h3>play168</h3><p>Dự án ứng dụng hoặc giải trí Play168.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/play168" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="play168 ứng dụng trò chơi giải trí" aria-label="Mở play168">
+              <span class="repo-label">play168</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/dayso168" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="dayso168 dãy số 168 ứng dụng">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff0e6;--accent:#e38b37">168</span><span class="external" aria-hidden="true">↗</span></div><h3>dayso168</h3><p>Dự án liên quan đến dãy số 168.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/dayso168" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="dayso168 dãy số 168 ứng dụng" aria-label="Mở dayso168">
+              <span class="repo-label">dayso168</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/skykid" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="skykid ứng dụng giải trí">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff0e6;--accent:#e38b37">SK</span><span class="external" aria-hidden="true">↗</span></div><h3>skykid</h3><p>Dự án Skykid; chức năng cụ thể cần xem trong repository.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/skykid" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="skykid ứng dụng giải trí" aria-label="Mở skykid">
+              <span class="repo-label">skykid</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/karaoke" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="karaoke hát karaoke âm nhạc">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff0e6;--accent:#e38b37">K</span><span class="external" aria-hidden="true">↗</span></div><h3>karaoke</h3><p>Dự án hoặc ứng dụng karaoke.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/karaoke" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="karaoke hát karaoke âm nhạc" aria-label="Mở karaoke">
+              <span class="repo-label">karaoke</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
           </div>
         </details>
@@ -446,26 +601,33 @@
             <span class="section-count"><span class="visible-count">7</span> dự án</span>
           </summary>
           <div class="repo-grid">
-            <a class="repo-card" href="https://github.com/hatubiu10/nhatky" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="nhatky nhật ký cá nhân">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">NK</span><span class="external" aria-hidden="true">↗</span></div><h3>nhatky</h3><p>Dự án nhật ký.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/nhatky" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="nhatky nhật ký cá nhân" aria-label="Mở nhatky">
+              <span class="repo-label">nhatky</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/sotaynauan1" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sotaynauan1 sổ tay nấu ăn công thức">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">NA</span><span class="external" aria-hidden="true">↗</span></div><h3>sotaynauan1</h3><p>Sổ tay nấu ăn.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/sotaynauan1" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sotaynauan1 sổ tay nấu ăn công thức" aria-label="Mở sotaynauan1">
+              <span class="repo-label">sotaynauan1</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/12yeutocuocdoi" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="12yeutocuocdoi 12 yếu tố cuộc đời nội dung">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">12</span><span class="external" aria-hidden="true">↗</span></div><h3>12yeutocuocdoi</h3><p>Dự án nội dung “12 yếu tố cuộc đời”.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/12yeutocuocdoi" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="12yeutocuocdoi 12 yếu tố cuộc đời nội dung" aria-label="Mở 12yeutocuocdoi">
+              <span class="repo-label">12yeutocuocdoi</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/sodocuocdoi" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sodocuocdoi sơ đồ cuộc đời">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">SĐ</span><span class="external" aria-hidden="true">↗</span></div><h3>sodocuocdoi</h3><p>Sơ đồ cuộc đời (theo tên repository).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/sodocuocdoi" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sodocuocdoi sơ đồ cuộc đời" aria-label="Mở sodocuocdoi">
+              <span class="repo-label">sodocuocdoi</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/sotaynauan" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sotaynauan sổ tay nấu ăn công thức">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">NA</span><span class="external" aria-hidden="true">↗</span></div><h3>sotaynauan</h3><p>Sổ tay nấu ăn.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/sotaynauan" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sotaynauan sổ tay nấu ăn công thức" aria-label="Mở sotaynauan">
+              <span class="repo-label">sotaynauan</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/soidaytroibuoc" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="soidaytroibuoc sợi dây trói buộc">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">SD</span><span class="external" aria-hidden="true">↗</span></div><h3>soidaytroibuoc</h3><p>Dự án nội dung có tên “sợi dây trói buộc”.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/soidaytroibuoc" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="soidaytroibuoc sợi dây trói buộc" aria-label="Mở soidaytroibuoc">
+              <span class="repo-label">soidaytroibuoc</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/sodocay" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sodocay sơ đồ cây">
-              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">SC</span><span class="external" aria-hidden="true">↗</span></div><h3>sodocay</h3><p>Sơ đồ cây hoặc dự án liên quan đến sơ đồ cây.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/sodocay" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sodocay sơ đồ cây" aria-label="Mở sodocay">
+              <span class="repo-label">sodocay</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
           </div>
         </details>
@@ -476,11 +638,13 @@
             <span class="section-count"><span class="visible-count">2</span> dự án</span>
           </summary>
           <div class="repo-grid">
-            <a class="repo-card" href="https://github.com/hatubiu10/hatubiu10.github.io" target="_blank" rel="noopener noreferrer" data-category="website" data-search="hatubiu10.github.io website trang cá nhân GitHub Pages">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">WEB</span><span class="external" aria-hidden="true">↗</span></div><h3>hatubiu10.github.io</h3><p>Repository website cá nhân trên GitHub Pages.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/hatubiu10.github.io" target="_blank" rel="noopener noreferrer" data-category="website" data-search="hatubiu10.github.io website trang cá nhân GitHub Pages" aria-label="Mở hatubiu10.github.io">
+              <span class="repo-label">hatubiu10.github.io</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://hatbui10.github.io/60hoagiap/" target="_blank" rel="noopener noreferrer" data-category="website" data-search="60hoagiap 60 hoa giáp lịch can chi">
-              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">60</span><span class="external" aria-hidden="true">↗</span></div><h3>60 Hoa Giáp</h3><p>Trang tra cứu về 60 Hoa Giáp (theo tên đường dẫn).</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
+            <a class="repo-card" href="https://hatbui10.github.io/60hoagiap/" target="_blank" rel="noopener noreferrer" data-category="website" data-search="60hoagiap 60 hoa giáp lịch can chi" aria-label="Mở 60 Hoa Giáp">
+              <span class="repo-label">60 Hoa Giáp</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
           </div>
         </details>
@@ -491,11 +655,13 @@
             <span class="section-count"><span class="visible-count">2</span> dự án</span>
           </summary>
           <div class="repo-grid">
-            <a class="repo-card" href="https://github.com/hatubiu10/linhai" target="_blank" rel="noopener noreferrer" data-category="other" data-search="linhai chưa rõ nội dung">
-              <div class="card-top"><span class="repo-icon" style="--tint:#edf0f5;--accent:#68758d">LH</span><span class="external" aria-hidden="true">↗</span></div><h3>linhai</h3><p>Chưa rõ chức năng theo tên; mở repository để xem chi tiết.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/linhai" target="_blank" rel="noopener noreferrer" data-category="other" data-search="linhai chưa rõ nội dung" aria-label="Mở linhai">
+              <span class="repo-label">linhai</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
-            <a class="repo-card" href="https://github.com/hatubiu10/battu" target="_blank" rel="noopener noreferrer" data-category="other" data-search="battu chưa rõ chức năng">
-              <div class="card-top"><span class="repo-icon" style="--tint:#edf0f5;--accent:#68758d">BT</span><span class="external" aria-hidden="true">↗</span></div><h3>battu</h3><p>Tên repository chưa đủ rõ để xác định chức năng; mở repo để xem chi tiết.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            <a class="repo-card" href="https://github.com/hatubiu10/battu" target="_blank" rel="noopener noreferrer" data-category="other" data-search="battu chưa rõ chức năng" aria-label="Mở battu">
+              <span class="repo-label">battu</span>
+              <span class="external" aria-hidden="true">↗</span>
             </a>
           </div>
         </details>
