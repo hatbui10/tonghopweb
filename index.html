@@ -350,6 +350,8 @@
     body.editing .repo-card:hover { border-color: #aa96ff; box-shadow: 0 0 0 1px rgba(160,130,255,.15), 0 0 16px rgba(145,111,255,.18); }
     .repo-label[contenteditable="true"] { min-width: 50px; max-width: 100%; padding: 3px 6px; border: 1px dashed rgba(176,157,255,.6); border-radius: 6px; outline: none; background: rgba(104,81,215,.12); color: #e6deff; cursor: text; }
     .repo-label[contenteditable="true"]:focus { border-style: solid; border-color: #a994ff; background: rgba(104,81,215,.2); box-shadow: 0 0 0 2px rgba(159,135,255,.12), 0 0 12px rgba(140,113,255,.14); }
+    .category-title[contenteditable="true"] { padding: 3px 6px; border: 1px dashed rgba(176,157,255,.6); border-radius: 6px; outline: none; background: rgba(104,81,215,.12); color: #e6deff; cursor: text; }
+    .category-title[contenteditable="true"]:focus { border-style: solid; border-color: #a994ff; background: rgba(104,81,215,.2); box-shadow: 0 0 0 2px rgba(159,135,255,.12), 0 0 12px rgba(140,113,255,.14); }
     @media (max-width: 560px) {
       .toolbar-actions { width: 100%; }
       .admin-button, .expand-all-btn { min-height: 40px; }
@@ -428,7 +430,7 @@
             </button>
             <button class="admin-button" id="admin-button" type="button" aria-pressed="false">
               <span class="admin-button-icon" aria-hidden="true">🔐</span>
-              <span class="admin-button-label">Nhập mật khẩu</span>
+              <span class="admin-button-label">Mở chế độ sửa</span>
             </button>
           </div>
           <span class="filter-tip">Chạm vào một chủ đề để xem các dự án bên trong</span>
@@ -441,22 +443,21 @@
           <button class="dialog-close" id="close-admin" type="button" aria-label="Đóng">×</button>
           <span class="dialog-badge" aria-hidden="true">✎</span>
           <h2 id="admin-title">Mở chế độ chỉnh sửa</h2>
-          <p>Nhập mật khẩu quản trị để sửa tên các nút dự án.</p>
+          <p>Nhập đúng mật khẩu, chế độ sửa sẽ tự mở.</p>
           <label for="admin-password">Mật khẩu</label>
-          <input id="admin-password" type="password" autocomplete="current-password" placeholder="Nhập mật khẩu">
+          <input id="admin-password" type="password" inputmode="numeric" autocomplete="current-password" placeholder="Nhập mật khẩu">
           <div class="admin-error" id="admin-error" aria-live="polite"></div>
           <div class="admin-dialog-actions">
             <button class="dialog-cancel" id="cancel-admin" type="button">Để sau</button>
-            <button class="dialog-submit" id="unlock-admin" type="button">Mở chỉnh sửa <span aria-hidden="true">↗</span></button>
           </div>
-          <small class="security-note">Đổi giá trị EDIT_PASSWORD trong mã HTML trước khi dùng. Mật khẩu trong HTML chỉ khóa giao diện, không bảo vệ dữ liệu Firebase.</small>
+          <small class="security-note">Mật khẩu nằm trong mã HTML nên chỉ khóa giao diện, không bảo vệ dữ liệu Firebase.</small>
         </div>
       </dialog>
 
       <div id="project-list" class="category-accordions">
         <details class="category-section" data-section="education" aria-labelledby="education-title">
           <summary class="section-heading">
-            <div class="section-title-wrap"><span class="section-icon" style="--tint:#e8f3ff">📚</span><div><h2 id="education-title">Giáo dục &amp; quản lý trường học</h2><p>Các dự án có vẻ liên quan đến lớp học, giáo viên và vận hành trường.</p></div></div>
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#e8f3ff">📚</span><div><h2 class="category-title" id="education-title">Giáo dục &amp; quản lý trường học</h2><p>Các dự án có vẻ liên quan đến lớp học, giáo viên và vận hành trường.</p></div></div>
             <span class="section-count"><span class="visible-count">13</span> dự án</span>
           </summary>
           <div class="repo-grid">
@@ -517,7 +518,7 @@
 
         <details class="category-section" data-section="tools" aria-labelledby="tools-title">
           <summary class="section-heading">
-            <div class="section-title-wrap"><span class="section-icon" style="--tint:#f0eaff">🧰</span><div><h2 id="tools-title">Công cụ, dữ liệu &amp; AI</h2><p>Tiện ích về tệp, dữ liệu, lập trình, tự động hóa và AI.</p></div></div>
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#f0eaff">🧰</span><div><h2 class="category-title" id="tools-title">Công cụ, dữ liệu &amp; AI</h2><p>Tiện ích về tệp, dữ liệu, lập trình, tự động hóa và AI.</p></div></div>
             <span class="section-count"><span class="visible-count">19</span> dự án</span>
           </summary>
           <div class="repo-grid">
@@ -602,7 +603,7 @@
 
         <details class="category-section" data-section="design" aria-labelledby="design-title">
           <summary class="section-heading">
-            <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff3e2">🎨</span><div><h2 id="design-title">Hình ảnh, chữ &amp; thiết kế</h2><p>Các repository có tên gợi đến hình ảnh, màu sắc hoặc trình bày.</p></div></div>
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff3e2">🎨</span><div><h2 class="category-title" id="design-title">Hình ảnh, chữ &amp; thiết kế</h2><p>Các repository có tên gợi đến hình ảnh, màu sắc hoặc trình bày.</p></div></div>
             <span class="section-count"><span class="visible-count">6</span> dự án</span>
           </summary>
           <div class="repo-grid">
@@ -635,7 +636,7 @@
 
         <details class="category-section" data-section="lavie" aria-labelledby="lavie-title">
           <summary class="section-heading">
-            <div class="section-title-wrap"><span class="section-icon" style="--tint:#e5f8f4">💧</span><div><h2 id="lavie-title">Kinh doanh &amp; nước Lavie</h2><p>Các repository có tên liên quan đến Lavie, kho hàng hoặc đặt mua.</p></div></div>
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#e5f8f4">💧</span><div><h2 class="category-title" id="lavie-title">Kinh doanh &amp; nước Lavie</h2><p>Các repository có tên liên quan đến Lavie, kho hàng hoặc đặt mua.</p></div></div>
             <span class="section-count"><span class="visible-count">6</span> dự án</span>
           </summary>
           <div class="repo-grid">
@@ -668,7 +669,7 @@
 
         <details class="category-section" data-section="apps" aria-labelledby="apps-title">
           <summary class="section-heading">
-            <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff0e6">🎮</span><div><h2 id="apps-title">Ứng dụng &amp; giải trí</h2><p>Các dự án mang tính ứng dụng hoặc giải trí.</p></div></div>
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff0e6">🎮</span><div><h2 class="category-title" id="apps-title">Ứng dụng &amp; giải trí</h2><p>Các dự án mang tính ứng dụng hoặc giải trí.</p></div></div>
             <span class="section-count"><span class="visible-count">4</span> dự án</span>
           </summary>
           <div class="repo-grid">
@@ -693,7 +694,7 @@
 
         <details class="category-section" data-section="personal" aria-labelledby="personal-title">
           <summary class="section-heading">
-            <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff0f2">✍️</span><div><h2 id="personal-title">Sổ tay, nội dung &amp; sơ đồ</h2><p>Nhật ký, sổ tay và các dự án mang tính sơ đồ hoặc nội dung.</p></div></div>
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff0f2">✍️</span><div><h2 class="category-title" id="personal-title">Sổ tay, nội dung &amp; sơ đồ</h2><p>Nhật ký, sổ tay và các dự án mang tính sơ đồ hoặc nội dung.</p></div></div>
             <span class="section-count"><span class="visible-count">7</span> dự án</span>
           </summary>
           <div class="repo-grid">
@@ -730,7 +731,7 @@
 
         <details class="category-section" data-section="website" aria-labelledby="website-title">
           <summary class="section-heading">
-            <div class="section-title-wrap"><span class="section-icon" style="--tint:#e8f3ff">🌐</span><div><h2 id="website-title">Website &amp; trang cá nhân</h2><p>Repository trang GitHub Pages.</p></div></div>
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#e8f3ff">🌐</span><div><h2 class="category-title" id="website-title">Website &amp; trang cá nhân</h2><p>Repository trang GitHub Pages.</p></div></div>
             <span class="section-count"><span class="visible-count">2</span> dự án</span>
           </summary>
           <div class="repo-grid">
@@ -747,7 +748,7 @@
 
         <details class="category-section" data-section="other" aria-labelledby="other-title">
           <summary class="section-heading">
-            <div class="section-title-wrap"><span class="section-icon" style="--tint:#edf0f5">🔎</span><div><h2 id="other-title">Khác / cần xem nội dung</h2><p>Tên repository chưa đủ rõ để phân loại chính xác.</p></div></div>
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#edf0f5">🔎</span><div><h2 class="category-title" id="other-title">Khác / cần xem nội dung</h2><p>Tên repository chưa đủ rõ để phân loại chính xác.</p></div></div>
             <span class="section-count"><span class="visible-count">2</span> dự án</span>
           </summary>
           <div class="repo-grid">
@@ -775,11 +776,11 @@
 
   <script>
     (() => {
-      const EDIT_PASSWORD = "THAY_MAT_KHAU_CUA_BAN"; // Đổi chuỗi này trước khi sử dụng.
-      const PASSWORD_PLACEHOLDER = "THAY_MAT_KHAU_CUA_BAN";
+      const EDIT_PASSWORD = "123456";
       const search = document.getElementById('search');
       const cards = [...document.querySelectorAll('.repo-card')];
       const sections = [...document.querySelectorAll('.category-section')];
+      const categoryTitles = [...document.querySelectorAll('.category-section .section-heading h2')];
       const resultCount = document.getElementById('result-count');
       const emptyState = document.getElementById('empty-state');
       const toggleAll = document.getElementById('toggle-all');
@@ -792,7 +793,9 @@
       let editMode = false;
       let firebaseState = 'loading';
       const labelsById = new Map();
+      const categoryTitlesById = new Map();
       window.pendingProjectNameSaves = window.pendingProjectNameSaves || [];
+      window.pendingCategoryNameSaves = window.pendingCategoryNameSaves || [];
 
       function showStatus(message, kind = 'info') {
         adminStatus.textContent = message;
@@ -828,14 +831,14 @@
       }
 
       function setEditMode(enabled) {
-        if (!enabled && document.activeElement && document.activeElement.matches('.repo-label[contenteditable="true"]')) {
-          document.activeElement.blur();
-        }
+        const active = document.activeElement;
+        if (!enabled && active && active.matches('.repo-label[contenteditable="true"], .category-title[contenteditable="true"]')) active.blur();
         editMode = enabled;
         document.body.classList.toggle('editing', editMode);
         adminButton.setAttribute('aria-pressed', String(editMode));
         adminButton.querySelector('.admin-button-icon').textContent = editMode ? '✎' : '🔐';
-        adminButton.querySelector('.admin-button-label').textContent = editMode ? 'Khóa chế độ sửa' : 'Nhập mật khẩu';
+        adminButton.querySelector('.admin-button-label').textContent = editMode ? 'Khóa chế độ sửa' : 'Mở chế độ sửa';
+
         cards.forEach(card => {
           const label = card.querySelector('.repo-label');
           label.contentEditable = String(editMode);
@@ -848,21 +851,34 @@
             label.setAttribute('aria-label', card.dataset.projectId);
           }
         });
+        categoryTitles.forEach(title => {
+          const id = title.closest('.category-section').dataset.section;
+          title.contentEditable = String(editMode);
+          title.spellcheck = false;
+          if (editMode) {
+            title.setAttribute('role', 'textbox');
+            title.setAttribute('aria-label', `Sửa tên nhóm ${id}`);
+          } else {
+            title.removeAttribute('role');
+            title.removeAttribute('aria-label');
+          }
+        });
+
         if (editMode) {
           const message = firebaseState === 'error'
             ? 'Chế độ sửa đã mở, nhưng Firebase chưa kết nối. Hãy kiểm tra kết nối và quyền Firestore.'
             : firebaseState === 'connected'
-              ? 'Đã kết nối Firestore · chạm vào tên, sửa rồi nhấn Enter hoặc chạm ra ngoài để lưu.'
-              : 'Chế độ sửa đã mở · chạm vào tên, sửa rồi nhấn Enter hoặc chạm ra ngoài để lưu.';
+              ? 'Đã kết nối Firestore · chạm vào tên nút hoặc tên nhóm để sửa rồi nhấn Enter/lưu khi rời ô.'
+              : 'Chế độ sửa đã mở · chạm vào tên nút hoặc tên nhóm để sửa rồi nhấn Enter/lưu khi rời ô.';
           showStatus(message, firebaseState === 'error' ? 'error' : firebaseState === 'connected' ? 'success' : 'info');
         } else {
           adminStatus.hidden = true;
         }
       }
 
-      function saveEditedLabel(card, label) {
+      function saveName(target, id, label, fallback) {
         if (!editMode) return;
-        const previous = label.dataset.originalName || card.dataset.projectId;
+        const previous = label.dataset.originalName || fallback;
         const next = label.textContent.trim().slice(0, 80);
         if (!next) {
           label.textContent = previous;
@@ -871,22 +887,20 @@
         label.textContent = next;
         if (next === previous) return;
         label.dataset.originalName = next;
-        card.classList.add('is-saving');
         showStatus(`Đang lưu tên “${next}”…`, 'saving');
-        const request = { id: card.dataset.projectId, name: next };
-        if (typeof window.firebaseSaveProjectName === 'function') {
-          window.firebaseSaveProjectName(request.id, request.name);
+        const request = { id, name: next };
+        if (target === 'category') {
+          if (typeof window.firebaseSaveCategoryName === 'function') window.firebaseSaveCategoryName(id, next);
+          else window.pendingCategoryNameSaves.push(request);
         } else {
-          window.pendingProjectNameSaves.push(request);
+          const card = label.closest('.repo-card');
+          if (card) card.classList.add('is-saving');
+          if (typeof window.firebaseSaveProjectName === 'function') window.firebaseSaveProjectName(id, next);
+          else window.pendingProjectNameSaves.push(request);
         }
       }
 
-      cards.forEach(card => {
-        const label = card.querySelector('.repo-label');
-        const url = new URL(card.href, window.location.href);
-        const projectId = card.dataset.projectId || decodeURIComponent(url.pathname.split('/').filter(Boolean).pop() || label.textContent.trim());
-        card.dataset.projectId = projectId;
-        labelsById.set(projectId, label);
+      function addEditableNameBehavior(label, target, id, fallback) {
         label.dataset.originalName = label.textContent.trim();
         label.addEventListener('focus', () => {
           if (editMode) label.dataset.originalName = label.textContent.trim();
@@ -897,13 +911,35 @@
             label.blur();
           } else if (event.key === 'Escape') {
             event.preventDefault();
-            label.textContent = label.dataset.originalName || projectId;
+            label.textContent = label.dataset.originalName || fallback;
             label.blur();
           }
         });
-        label.addEventListener('blur', () => saveEditedLabel(card, label));
+        label.addEventListener('blur', () => saveName(target, id, label, fallback));
+      }
+
+      cards.forEach(card => {
+        const label = card.querySelector('.repo-label');
+        const url = new URL(card.href, window.location.href);
+        const projectId = card.dataset.projectId || decodeURIComponent(url.pathname.split('/').filter(Boolean).pop() || label.textContent.trim());
+        card.dataset.projectId = projectId;
+        labelsById.set(projectId, label);
+        addEditableNameBehavior(label, 'project', projectId, projectId);
         card.addEventListener('click', event => {
           if (editMode) event.preventDefault();
+        });
+      });
+
+      sections.forEach(section => {
+        const title = section.querySelector('.section-heading h2');
+        const id = section.dataset.section;
+        categoryTitlesById.set(id, title);
+        addEditableNameBehavior(title, 'category', id, id);
+        section.querySelector('.section-heading').addEventListener('click', event => {
+          if (editMode && event.target.closest('.category-title')) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
         });
       });
 
@@ -933,21 +969,19 @@
       });
 
       function unlockAdmin() {
-        if (EDIT_PASSWORD === PASSWORD_PLACEHOLDER) {
-          adminError.textContent = 'Hãy đổi EDIT_PASSWORD trong mã HTML trước khi sử dụng.';
-          return;
-        }
-        if (adminPassword.value !== EDIT_PASSWORD) {
-          adminError.textContent = 'Mật khẩu chưa đúng. Vui lòng thử lại.';
-          adminPassword.select();
-          return;
-        }
+        if (adminPassword.value !== EDIT_PASSWORD) return false;
+        adminPassword.value = '';
+        adminError.textContent = '';
         adminDialog.close();
         setEditMode(true);
+        return true;
       }
-      document.getElementById('unlock-admin').addEventListener('click', unlockAdmin);
+      adminPassword.addEventListener('input', () => {
+        if (unlockAdmin()) return;
+        adminError.textContent = adminPassword.value.length >= EDIT_PASSWORD.length ? 'Mật khẩu chưa đúng.' : '';
+      });
       adminPassword.addEventListener('keydown', event => {
-        if (event.key === 'Enter') unlockAdmin();
+        if (event.key === 'Enter' && !unlockAdmin()) adminError.textContent = 'Mật khẩu chưa đúng.';
       });
 
       window.addEventListener('firebase-project-names', event => {
@@ -958,19 +992,24 @@
           label.dataset.originalName = name;
         });
       });
+      window.addEventListener('firebase-category-names', event => {
+        Object.entries(event.detail || {}).forEach(([id, name]) => {
+          const label = categoryTitlesById.get(id);
+          if (!label || typeof name !== 'string' || document.activeElement === label) return;
+          label.textContent = name;
+          label.dataset.originalName = name;
+        });
+      });
       window.addEventListener('firebase-status', event => {
         const detail = event.detail || {};
         firebaseState = detail.kind || 'error';
-        if (detail.kind === 'error' && editMode) {
-          showStatus(detail.message || 'Không kết nối được Firebase.', 'error');
-        } else if (detail.kind !== 'error' && editMode) {
-          showStatus(detail.message || 'Firebase đã đồng bộ.', 'success');
-        }
+        if (detail.kind === 'error' && editMode) showStatus(detail.message || 'Không kết nối được Firebase.', 'error');
+        else if (detail.kind !== 'error' && editMode) showStatus(detail.message || 'Firebase đã đồng bộ.', 'success');
       });
       window.addEventListener('firebase-save-result', event => {
-        const { id, name, ok, message } = event.detail || {};
-        const label = labelsById.get(id);
-        const card = label && label.closest('.repo-card');
+        const { id, name, ok, message, target = 'project' } = event.detail || {};
+        const label = target === 'category' ? categoryTitlesById.get(id) : labelsById.get(id);
+        const card = target === 'project' && label ? label.closest('.repo-card') : null;
         if (card) card.classList.remove('is-saving');
         if (ok) {
           if (label) label.dataset.originalName = name;
@@ -1016,6 +1055,32 @@
           }
         };
 
+        window.firebaseSaveCategoryName = async (id, name) => {
+          try {
+            await firestoreSdk.setDoc(
+              firestoreSdk.doc(db, 'categoryNames', id),
+              { name, updatedAt: firestoreSdk.serverTimestamp() },
+              { merge: true }
+            );
+            window.dispatchEvent(new CustomEvent('firebase-save-result', { detail: { id, name, ok: true, target: 'category' } }));
+          } catch (error) {
+            window.dispatchEvent(new CustomEvent('firebase-save-result', { detail: { id, name, ok: false, message: error.code || error.message, target: 'category' } }));
+          }
+        };
+
+        firestoreSdk.onSnapshot(
+          firestoreSdk.collection(db, 'categoryNames'),
+          snapshot => {
+            const names = {};
+            snapshot.forEach(item => {
+              const data = item.data();
+              if (typeof data.name === 'string') names[item.id] = data.name;
+            });
+            window.dispatchEvent(new CustomEvent('firebase-category-names', { detail: names }));
+          },
+          error => window.dispatchEvent(new CustomEvent('firebase-status', { detail: { kind: 'error', message: `Danh mục Firestore: ${error.code || error.message}` } }))
+        );
+
         firestoreSdk.onSnapshot(
           firestoreSdk.collection(db, 'projectNames'),
           snapshot => {
@@ -1035,10 +1100,15 @@
           const item = queued.shift();
           window.firebaseSaveProjectName(item.id, item.name);
         }
+        const queuedCategories = window.pendingCategoryNameSaves || [];
+        while (queuedCategories.length) {
+          const item = queuedCategories.shift();
+          window.firebaseSaveCategoryName(item.id, item.name);
+        }
       } catch (error) {
         window.dispatchEvent(new CustomEvent('firebase-status', { detail: { kind: 'error', message: `Không tải được Firebase: ${error.message}` } }));
       }
     })();
   </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a467ce56bb873947',t:'MTc5MTMyMjYzMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a467dc3068a4dc87',t:'MTc5MTMyMzIwMA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
