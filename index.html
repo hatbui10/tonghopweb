@@ -103,27 +103,50 @@
     #search:focus { border-color: #8aabff; box-shadow: 0 0 0 3px rgba(71,120,245,.1); background: white; }
     .result-count { color: var(--muted); font-size: 12px; white-space: nowrap; }
     .result-count strong { color: var(--ink); }
-    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .filter-btn {
-      display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid #e5e9f0;
-      border-radius: 999px; background: #fff; color: #58667d; font-size: 11px; font-weight: 700; cursor: pointer;
-      transition: .18s ease;
+    .toolbar-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 13px; }
+    .expand-all-btn {
+      min-height: 36px; padding: 6px 10px; display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid #e7eaf4; border-radius: 12px; background: linear-gradient(135deg, #fff, #f7f8ff);
+      color: #58688a; font-size: 10px; font-weight: 750; cursor: pointer; box-shadow: 0 3px 10px rgba(40,63,105,.035); transition: .18s ease;
     }
-    .filter-btn:hover { border-color: #c3cee0; color: var(--ink); }
-    .filter-btn[aria-pressed="true"] { border-color: var(--navy); background: var(--navy); color: white; }
-    .filter-btn .filter-num { opacity: .7; font-size: 10px; }
-
-    .category-section { margin: 34px 0 0; scroll-margin-top: 18px; }
-    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 14px; margin-bottom: 14px; }
-    .section-title-wrap { display: flex; align-items: center; gap: 11px; }
+    .expand-all-btn:hover { border-color: #c9d5ef; color: #33466c; box-shadow: 0 6px 14px rgba(65,100,170,.09); transform: translateY(-1px); }
+    .expand-all-btn[aria-expanded="true"] { border-color: #cbd7f2; background: #f4f7ff; color: #3f5f9f; }
+    .expand-all-icon { width: 21px; height: 21px; display: grid; place-items: center; border-radius: 7px; background: #f0eaff; color: #7568c7; font-size: 12px; }
+    .expand-all-count { padding: 3px 6px; border-radius: 999px; background: #edf1f8; color: #7c8799; font-size: 8px; font-weight: 850; }
+    .filter-tip { color: #98a3b6; font-size: 10px; }
+    .category-accordions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 10px; margin: 24px 0 0; }
+    .category-section {
+      min-width: 0; margin: 0; overflow: hidden; border: 1px solid #e7ebf2; border-radius: 15px; background: white;
+      box-shadow: 0 4px 14px rgba(22,39,73,.035); scroll-margin-top: 18px; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+    .category-section[hidden] { display: none !important; }
+    .category-section:not([open]) > .repo-grid { display: none; }
+    .category-section:not([open]):hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(22,39,73,.075); }
+    .category-section[open] { grid-column: 1 / -1; border-color: #d5e0f4; box-shadow: 0 10px 26px rgba(22,39,73,.07); }
+    .section-heading {
+      min-height: 49px; padding: 7px 10px; display: flex; align-items: center; justify-content: space-between; gap: 9px;
+      margin: 0; cursor: pointer; list-style: none; background: linear-gradient(115deg, #fff, #fbfcff); transition: background .18s ease;
+    }
+    .section-heading::-webkit-details-marker { display: none; }
+    .section-heading::marker { content: ""; }
+    .category-section:not([open]) > .section-heading:hover { background: linear-gradient(115deg, #f8faff, #fbfaff); }
+    .category-section[open] > .section-heading { border-bottom: 1px solid #edf0f6; background: linear-gradient(110deg, #f9fbff, #fff); }
+    .category-section > .section-heading::after {
+      content: "⌄"; width: 23px; height: 23px; flex: none; display: grid; place-items: center; margin-left: 1px;
+      border-radius: 8px; background: #f2f5fa; color: #7d8ba2; font-size: 14px; line-height: 1; transition: transform .18s ease, background .18s ease;
+    }
+    .category-section[open] > .section-heading::after { transform: rotate(180deg); background: #edf2ff; color: #5576bf; }
+    .section-heading:focus-visible { outline: 3px solid rgba(71,120,245,.22); outline-offset: -3px; }
+    .section-title-wrap { display: flex; align-items: center; gap: 8px; }
     .section-icon {
-      display: grid; place-items: center; width: 39px; height: 39px; flex: none; border-radius: 13px;
-      background: var(--tint, #e9efff); font-size: 18px;
+      display: grid; place-items: center; width: 30px; height: 30px; flex: none; border-radius: 10px;
+      background: var(--tint, #e9efff); font-size: 14px;
     }
-    .section-heading h2 { margin: 0; font-size: 17px; letter-spacing: -.025em; }
-    .section-heading p { margin: 4px 0 0; color: var(--muted); font-size: 11px; }
-    .section-count { padding: 6px 10px; border: 1px solid #e4e8ef; border-radius: 999px; color: #66738a; background: white; font-size: 10px; font-weight: 700; white-space: nowrap; }
-    .repo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .section-heading h2 { margin: 0; font-size: 11.5px; letter-spacing: -.015em; }
+    .section-heading p { display: none; }
+    .section-count { margin-left: auto; padding: 3px 6px; border: 1px solid #e9edf4; border-radius: 999px; color: #758198; background: #fff; font-size: 8px; font-weight: 750; white-space: nowrap; }
+    .repo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 12px; animation: cards-in .2s ease-out; }
+    @keyframes cards-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
     .repo-card {
       min-width: 0; min-height: 168px; padding: 16px; display: flex; flex-direction: column;
       border: 1px solid #e7ebf2; border-radius: 16px; background: white; color: inherit;
@@ -166,11 +189,14 @@
       .toolbar-top { align-items: stretch; flex-direction: column; }
       .search-wrap { max-width: none; }
       .result-count { padding-left: 2px; }
-      .filters { gap: 7px; }
-      .filter-btn { padding: 8px 10px; font-size: 10px; }
+      .toolbar-bottom { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .filter-tip { font-size: 9px; }
+      .category-accordions { grid-template-columns: 1fr; gap: 8px; margin-top: 18px; }
+      .category-section[open] { grid-column: auto; }
+      .section-heading { min-height: 49px; padding: 7px 10px; }
       .repo-grid { grid-template-columns: 1fr; gap: 9px; }
       .repo-card { min-height: 150px; }
-      .section-heading h2 { font-size: 15px; }
+      .section-heading h2 { font-size: 11.5px; }
       .footer { flex-direction: column; gap: 8px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -206,7 +232,7 @@
         </div>
       </section>
 
-      <section class="toolbar" aria-label="Tìm kiếm và lọc dự án">
+      <section class="toolbar" aria-label="Tìm kiếm và mở nhóm dự án">
         <div class="toolbar-top">
           <label class="search-wrap" for="search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.2 4.2"/></svg>
@@ -214,25 +240,22 @@
           </label>
           <div class="result-count" id="result-count" aria-live="polite">Đang hiển thị <strong>59/59</strong> dự án</div>
         </div>
-        <nav class="filters" aria-label="Lọc theo nhóm">
-          <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">Tất cả <span class="filter-num">59</span></button>
-          <button class="filter-btn" type="button" data-filter="education" aria-pressed="false">📚 Giáo dục <span class="filter-num">13</span></button>
-          <button class="filter-btn" type="button" data-filter="tools" aria-pressed="false">🧰 Công cụ, dữ liệu &amp; AI <span class="filter-num">19</span></button>
-          <button class="filter-btn" type="button" data-filter="design" aria-pressed="false">🎨 Hình ảnh &amp; thiết kế <span class="filter-num">6</span></button>
-          <button class="filter-btn" type="button" data-filter="lavie" aria-pressed="false">💧 Nước Lavie <span class="filter-num">6</span></button>
-          <button class="filter-btn" type="button" data-filter="apps" aria-pressed="false">🎮 Ứng dụng &amp; giải trí <span class="filter-num">4</span></button>
-          <button class="filter-btn" type="button" data-filter="personal" aria-pressed="false">✍️ Sổ tay &amp; sơ đồ <span class="filter-num">7</span></button>
-          <button class="filter-btn" type="button" data-filter="website" aria-pressed="false">🌐 Website <span class="filter-num">2</span></button>
-          <button class="filter-btn" type="button" data-filter="other" aria-pressed="false">🔎 Khác <span class="filter-num">2</span></button>
-        </nav>
+        <div class="toolbar-bottom">
+          <button class="expand-all-btn" id="toggle-all" type="button" aria-expanded="false">
+            <span class="expand-all-icon" aria-hidden="true">✦</span>
+            <span id="toggle-all-label">Mở tất cả nhóm</span>
+            <span class="expand-all-count">08</span>
+          </button>
+          <span class="filter-tip">Chạm vào một chủ đề để xem các dự án bên trong</span>
+        </div>
       </section>
 
-      <div id="project-list">
-        <section class="category-section" data-section="education" aria-labelledby="education-title">
-          <div class="section-heading">
+      <div id="project-list" class="category-accordions">
+        <details class="category-section" data-section="education" aria-labelledby="education-title">
+          <summary class="section-heading">
             <div class="section-title-wrap"><span class="section-icon" style="--tint:#e8f3ff">📚</span><div><h2 id="education-title">Giáo dục &amp; quản lý trường học</h2><p>Các dự án có vẻ liên quan đến lớp học, giáo viên và vận hành trường.</p></div></div>
             <span class="section-count"><span class="visible-count">13</span> dự án</span>
-          </div>
+          </summary>
           <div class="repo-grid">
             <a class="repo-card" href="https://github.com/hatubiu10/danhsachday168" target="_blank" rel="noopener noreferrer" data-category="education" data-search="danhsachday168 danh sách dạy phân công giảng dạy">
               <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">D</span><span class="external" aria-hidden="true">↗</span></div><h3>danhsachday168</h3><p>Danh sách dạy hoặc phân công giảng dạy.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
@@ -274,13 +297,13 @@
               <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">LINK</span><span class="external" aria-hidden="true">↗</span></div><h3>dslinklop</h3><p>Danh sách liên kết lớp học.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
             </a>
           </div>
-        </section>
+        </details>
 
-        <section class="category-section" data-section="tools" aria-labelledby="tools-title">
-          <div class="section-heading">
+        <details class="category-section" data-section="tools" aria-labelledby="tools-title">
+          <summary class="section-heading">
             <div class="section-title-wrap"><span class="section-icon" style="--tint:#f0eaff">🧰</span><div><h2 id="tools-title">Công cụ, dữ liệu &amp; AI</h2><p>Tiện ích về tệp, dữ liệu, lập trình, tự động hóa và AI.</p></div></div>
             <span class="section-count"><span class="visible-count">19</span> dự án</span>
-          </div>
+          </summary>
           <div class="repo-grid">
             <a class="repo-card" href="https://github.com/hatubiu10/csv" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="csv dữ liệu bảng tính">
               <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">CSV</span><span class="external" aria-hidden="true">↗</span></div><h3>csv</h3><p>Tiện ích liên quan đến tệp hoặc dữ liệu CSV.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
@@ -340,13 +363,13 @@
               <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">HTML</span><span class="external" aria-hidden="true">↗</span></div><h3>mahoahtml1</h3><p>Công cụ mã hóa HTML (theo tên đường dẫn).</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
             </a>
           </div>
-        </section>
+        </details>
 
-        <section class="category-section" data-section="design" aria-labelledby="design-title">
-          <div class="section-heading">
+        <details class="category-section" data-section="design" aria-labelledby="design-title">
+          <summary class="section-heading">
             <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff3e2">🎨</span><div><h2 id="design-title">Hình ảnh, chữ &amp; thiết kế</h2><p>Các repository có tên gợi đến hình ảnh, màu sắc hoặc trình bày.</p></div></div>
             <span class="section-count"><span class="visible-count">6</span> dự án</span>
-          </div>
+          </summary>
           <div class="repo-grid">
             <a class="repo-card" href="https://github.com/hatubiu10/fontchudep" target="_blank" rel="noopener noreferrer" data-category="design" data-search="fontchudep font chữ đẹp kiểu chữ">
               <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">Aa</span><span class="external" aria-hidden="true">↗</span></div><h3>fontchudep</h3><p>Dự án về font chữ đẹp hoặc cách trình bày chữ.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
@@ -367,13 +390,13 @@
               <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">LV</span><span class="external" aria-hidden="true">↗</span></div><h3>longvongtron</h3><p>Dự án liên quan đến vòng tròn hoặc hình tròn (suy đoán theo tên).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
             </a>
           </div>
-        </section>
+        </details>
 
-        <section class="category-section" data-section="lavie" aria-labelledby="lavie-title">
-          <div class="section-heading">
+        <details class="category-section" data-section="lavie" aria-labelledby="lavie-title">
+          <summary class="section-heading">
             <div class="section-title-wrap"><span class="section-icon" style="--tint:#e5f8f4">💧</span><div><h2 id="lavie-title">Kinh doanh &amp; nước Lavie</h2><p>Các repository có tên liên quan đến Lavie, kho hàng hoặc đặt mua.</p></div></div>
             <span class="section-count"><span class="visible-count">6</span> dự án</span>
-          </div>
+          </summary>
           <div class="repo-grid">
             <a class="repo-card" href="https://github.com/hatubiu10/khonuoclavie" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="khonuoclavie kho nước Lavie quản lý kho">
               <div class="card-top"><span class="repo-icon" style="--tint:#e5f8f4;--accent:#169b81">K</span><span class="external" aria-hidden="true">↗</span></div><h3>khonuoclavie</h3><p>Dự án quản lý kho nước Lavie.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
@@ -394,13 +417,13 @@
               <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">SL</span><span class="external" aria-hidden="true">↗</span></div><h3>sonhaplavie</h3><p>Sổ nhập liệu hoặc quản lý nhập hàng Lavie (suy đoán theo tên).</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
             </a>
           </div>
-        </section>
+        </details>
 
-        <section class="category-section" data-section="apps" aria-labelledby="apps-title">
-          <div class="section-heading">
+        <details class="category-section" data-section="apps" aria-labelledby="apps-title">
+          <summary class="section-heading">
             <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff0e6">🎮</span><div><h2 id="apps-title">Ứng dụng &amp; giải trí</h2><p>Các dự án mang tính ứng dụng hoặc giải trí.</p></div></div>
             <span class="section-count"><span class="visible-count">4</span> dự án</span>
-          </div>
+          </summary>
           <div class="repo-grid">
             <a class="repo-card" href="https://github.com/hatubiu10/play168" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="play168 ứng dụng trò chơi giải trí">
               <div class="card-top"><span class="repo-icon" style="--tint:#fff0e6;--accent:#e38b37">P</span><span class="external" aria-hidden="true">↗</span></div><h3>play168</h3><p>Dự án ứng dụng hoặc giải trí Play168.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
@@ -415,13 +438,13 @@
               <div class="card-top"><span class="repo-icon" style="--tint:#fff0e6;--accent:#e38b37">K</span><span class="external" aria-hidden="true">↗</span></div><h3>karaoke</h3><p>Dự án hoặc ứng dụng karaoke.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
             </a>
           </div>
-        </section>
+        </details>
 
-        <section class="category-section" data-section="personal" aria-labelledby="personal-title">
-          <div class="section-heading">
+        <details class="category-section" data-section="personal" aria-labelledby="personal-title">
+          <summary class="section-heading">
             <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff0f2">✍️</span><div><h2 id="personal-title">Sổ tay, nội dung &amp; sơ đồ</h2><p>Nhật ký, sổ tay và các dự án mang tính sơ đồ hoặc nội dung.</p></div></div>
             <span class="section-count"><span class="visible-count">7</span> dự án</span>
-          </div>
+          </summary>
           <div class="repo-grid">
             <a class="repo-card" href="https://github.com/hatubiu10/nhatky" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="nhatky nhật ký cá nhân">
               <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">NK</span><span class="external" aria-hidden="true">↗</span></div><h3>nhatky</h3><p>Dự án nhật ký.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
@@ -445,13 +468,13 @@
               <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">SC</span><span class="external" aria-hidden="true">↗</span></div><h3>sodocay</h3><p>Sơ đồ cây hoặc dự án liên quan đến sơ đồ cây.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
             </a>
           </div>
-        </section>
+        </details>
 
-        <section class="category-section" data-section="website" aria-labelledby="website-title">
-          <div class="section-heading">
+        <details class="category-section" data-section="website" aria-labelledby="website-title">
+          <summary class="section-heading">
             <div class="section-title-wrap"><span class="section-icon" style="--tint:#e8f3ff">🌐</span><div><h2 id="website-title">Website &amp; trang cá nhân</h2><p>Repository trang GitHub Pages.</p></div></div>
             <span class="section-count"><span class="visible-count">2</span> dự án</span>
-          </div>
+          </summary>
           <div class="repo-grid">
             <a class="repo-card" href="https://github.com/hatubiu10/hatubiu10.github.io" target="_blank" rel="noopener noreferrer" data-category="website" data-search="hatubiu10.github.io website trang cá nhân GitHub Pages">
               <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">WEB</span><span class="external" aria-hidden="true">↗</span></div><h3>hatubiu10.github.io</h3><p>Repository website cá nhân trên GitHub Pages.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
@@ -460,13 +483,13 @@
               <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">60</span><span class="external" aria-hidden="true">↗</span></div><h3>60 Hoa Giáp</h3><p>Trang tra cứu về 60 Hoa Giáp (theo tên đường dẫn).</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
             </a>
           </div>
-        </section>
+        </details>
 
-        <section class="category-section" data-section="other" aria-labelledby="other-title">
-          <div class="section-heading">
+        <details class="category-section" data-section="other" aria-labelledby="other-title">
+          <summary class="section-heading">
             <div class="section-title-wrap"><span class="section-icon" style="--tint:#edf0f5">🔎</span><div><h2 id="other-title">Khác / cần xem nội dung</h2><p>Tên repository chưa đủ rõ để phân loại chính xác.</p></div></div>
             <span class="section-count"><span class="visible-count">2</span> dự án</span>
-          </div>
+          </summary>
           <div class="repo-grid">
             <a class="repo-card" href="https://github.com/hatubiu10/linhai" target="_blank" rel="noopener noreferrer" data-category="other" data-search="linhai chưa rõ nội dung">
               <div class="card-top"><span class="repo-icon" style="--tint:#edf0f5;--accent:#68758d">LH</span><span class="external" aria-hidden="true">↗</span></div><h3>linhai</h3><p>Chưa rõ chức năng theo tên; mở repository để xem chi tiết.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
@@ -475,7 +498,7 @@
               <div class="card-top"><span class="repo-icon" style="--tint:#edf0f5;--accent:#68758d">BT</span><span class="external" aria-hidden="true">↗</span></div><h3>battu</h3><p>Tên repository chưa đủ rõ để xác định chức năng; mở repo để xem chi tiết.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
             </a>
           </div>
-        </section>
+        </details>
 
       </div>
 
@@ -493,20 +516,25 @@
       const search = document.getElementById('search');
       const cards = [...document.querySelectorAll('.repo-card')];
       const sections = [...document.querySelectorAll('.category-section')];
-      const buttons = [...document.querySelectorAll('.filter-btn')];
       const resultCount = document.getElementById('result-count');
       const emptyState = document.getElementById('empty-state');
-      let activeFilter = 'all';
+      const toggleAll = document.getElementById('toggle-all');
+      const toggleAllLabel = document.getElementById('toggle-all-label');
+
+      function updateExpandButton() {
+        const visibleSections = sections.filter(section => !section.hidden);
+        const allOpen = visibleSections.length > 0 && visibleSections.every(section => section.open);
+        toggleAllLabel.textContent = allOpen ? 'Thu gọn tất cả nhóm' : 'Mở tất cả nhóm';
+        toggleAll.setAttribute('aria-expanded', String(allOpen));
+      }
 
       function update() {
         const query = search.value.trim().toLocaleLowerCase('vi');
         let visibleTotal = 0;
 
         cards.forEach(card => {
-          const matchesCategory = activeFilter === 'all' || card.dataset.category === activeFilter;
-          const haystack = (card.dataset.search + ' ' + card.innerText).toLocaleLowerCase('vi');
-          const matchesSearch = !query || haystack.includes(query);
-          const visible = matchesCategory && matchesSearch;
+          const haystack = (card.dataset.search + ' ' + card.textContent).toLocaleLowerCase('vi');
+          const visible = !query || haystack.includes(query);
           card.hidden = !visible;
           if (visible) visibleTotal++;
         });
@@ -515,19 +543,21 @@
           const visibleInSection = [...section.querySelectorAll('.repo-card')].filter(card => !card.hidden).length;
           section.hidden = visibleInSection === 0;
           section.querySelector('.visible-count').textContent = visibleInSection;
+          if (query && visibleInSection > 0) section.open = true;
         });
 
         resultCount.innerHTML = `Đang hiển thị <strong>${visibleTotal}/${cards.length}</strong> dự án`;
         emptyState.style.display = visibleTotal === 0 ? 'block' : 'none';
+        updateExpandButton();
       }
 
-      buttons.forEach(button => {
-        button.addEventListener('click', () => {
-          activeFilter = button.dataset.filter;
-          buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-          update();
-        });
+      toggleAll.addEventListener('click', () => {
+        const visibleSections = sections.filter(section => !section.hidden);
+        const open = visibleSections.some(section => !section.open);
+        visibleSections.forEach(section => { section.open = open; });
+        updateExpandButton();
       });
+      sections.forEach(section => section.addEventListener('toggle', updateExpandButton));
       search.addEventListener('input', update);
       update();
     })();
