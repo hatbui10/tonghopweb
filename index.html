@@ -1,545 +1,536 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lớp DELTA-L7 - Phương</title>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
-body { background-color: #050508; color: #e0e0e6; padding: 30px 3px 20px 3px; }
-h2, h3 { text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
-h2 { color: #00f0ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.5); font-size: 1.4rem; }
-h3 { color: #ff007f; text-shadow: 0 0 10px rgba(255, 0, 127, 0.5); font-size: 1.1rem; }
-.class-stats { text-align: center; color: #ffd700; font-size: 0.9rem; margin-bottom: 15px; font-weight: bold; }
-.class-panel { background: #0a0a14; border: 1px solid #00f0ff; border-radius: 6px; padding: 15px 8px; box-shadow: 0 0 15px rgba(0, 240, 255, 0.15); }
-.add-student-box { display: flex; flex-direction: column; gap: 10px; background: #0d0d1a; border: 1px solid #ffd700; border-radius: 4px; padding: 12px 10px; margin-bottom: 15px; }
-.add-student-box input { width: 100%; background: #050508; border: 1px solid #333; color: #fff; padding: 12px 10px; font-size: 0.9rem; border-radius: 4px; outline: none; }
-.btn-add { background: #ffd700; color: #000; border: none; padding: 12px; font-weight: bold; font-size: 0.9rem; border-radius: 4px; cursor: pointer; text-transform: uppercase; }
-.absent-section { background: rgba(255, 0, 127, 0.05); border: 1px dashed #ff007f; border-radius: 4px; padding: 10px; margin-bottom: 20px; }
-.absent-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.absent-title { color: #ff007f; font-weight: bold; font-size: 0.9rem; }
-.copy-btn { background: #ff007f; color: #fff; border: none; padding: 6px 12px; font-size: 0.8rem; font-weight: bold; border-radius: 3px; cursor: pointer; box-shadow: 0 0 8px #ff007f; }
-.absent-list { list-style: none; font-size: 0.9rem; color: #ff55a5; line-height: 1.4; }
-.absent-list li { padding: 3px 0; border-bottom: 1px solid rgba(255, 0, 127, 0.1); }
-.student-list { display: flex; flex-direction: column; gap: 10px; }
-.student-card { background: #121224; border: 1px solid #333; border-left: 4px solid #00f0ff; border-radius: 4px; padding: 12px 10px; display: flex; flex-direction: column; gap: 10px; }
-.student-card.status-absent { border-left-color: #ff007f; background: #1a0813; }
-.student-card.status-present { border-left-color: #00ff66; background: #081a10; }
-.student-info-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; border-bottom: 1px solid #222; padding-bottom: 6px; }
-.student-meta { display: flex; flex-direction: column; gap: 2px; flex: 1; }
-.student-name { font-weight: bold; font-size: 0.95rem; color: #fff; }
-.student-phone { font-size: 0.8rem; color: #888; }
-.student-actions-right { display: flex; gap: 5px; }
-.btn-call { background: #ffd700; color: #000; padding: 8px 12px; font-size: 0.9rem; border: none; border-radius: 4px; cursor: pointer; box-shadow: 0 0 5px #ffd700; }
-.btn-delete { background: #4a0000; color: #ff3333; border: 1px solid #ff3333; padding: 8px 10px; font-size: 0.9rem; border-radius: 4px; cursor: pointer; }
-.student-controls-row { display: flex; gap: 6px; align-items: center; }
-.btn-action { flex: 1; padding: 10px 3px; font-size: 0.8rem; font-weight: bold; border: none; border-radius: 3px; cursor: pointer; text-align: center; color: #fff; background: #333; }
-.btn-absent { background: #4a0025; color: #ff007f; border: 1px solid #ff007f; }
-.btn-absent.active { background: #ff007f; color: #fff; box-shadow: 0 0 10px #ff007f; }
-.btn-present { background: #003311; color: #00ff66; border: 1px solid #00ff66; }
-.btn-present.active { background: #00ff66; color: #000; box-shadow: 0 0 10px #00ff66; }
-.note-select { flex: 1.5; background: #1a1a3a; color: #00f0ff; border: 1px solid #00f0ff; padding: 9px 3px; font-size: 0.8rem; border-radius: 3px; outline: none; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101d38">
+  <title>Danh mục dự án GitHub — hatubiu10</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17243d;
+      --muted: #68758d;
+      --line: #e7ebf2;
+      --paper: #ffffff;
+      --wash: #f4f6fa;
+      --navy: #101d38;
+      --teal: #59dfc3;
+      --blue: #4778f5;
+      --shadow: 0 12px 32px rgba(22, 39, 73, .07);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--wash);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    .shell { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-mark {
+      width: 38px; height: 38px; display: grid; place-items: center;
+      border-radius: 12px; background: var(--navy); color: var(--teal);
+      font-size: 16px; font-weight: 850; letter-spacing: -.06em;
+      box-shadow: 0 5px 14px rgba(16, 29, 56, .18);
+    }
+    .brand-copy { display: grid; gap: 2px; }
+    .brand-copy strong { font-size: 13px; letter-spacing: .04em; }
+    .brand-copy span { font-size: 11px; color: var(--muted); }
+    .profile-link {
+      display: inline-flex; align-items: center; gap: 9px; padding: 10px 14px;
+      border: 1px solid #dfe4ed; border-radius: 999px; background: rgba(255,255,255,.72);
+      color: #34435e; font-size: 12px; font-weight: 700; text-decoration: none;
+      transition: .2s ease;
+    }
+    .profile-link:hover { border-color: #b7c4da; transform: translateY(-1px); }
+    .profile-link svg { width: 15px; height: 15px; }
+
+    .hero {
+      position: relative; overflow: hidden; isolation: isolate;
+      min-height: 300px; padding: 43px 48px; border-radius: 25px;
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 32px;
+      color: white; background: var(--navy);
+      box-shadow: 0 20px 45px rgba(16, 29, 56, .16);
+    }
+    .hero::before, .hero::after { content: ""; position: absolute; z-index: -1; pointer-events: none; }
+    .hero::before {
+      width: 430px; height: 430px; right: 90px; top: -285px; border-radius: 50%;
+      border: 1px solid rgba(130, 164, 220, .18); box-shadow: 0 0 0 35px rgba(130,164,220,.025), 0 0 0 75px rgba(130,164,220,.025);
+    }
+    .hero::after {
+      width: 310px; height: 310px; right: -110px; bottom: -210px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 220, 187, .26), rgba(56, 220, 187, 0) 68%);
+    }
+    .hero-copy { max-width: 670px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;
+      color: var(--teal); font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 19px; height: 2px; background: currentColor; border-radius: 2px; }
+    h1 { margin: 0; max-width: 660px; font-size: clamp(34px, 5vw, 55px); line-height: 1.06; letter-spacing: -.055em; }
+    .hero-copy p { max-width: 570px; margin: 17px 0 0; color: #b8c5dc; font-size: 14px; line-height: 1.75; }
+    .hero-copy p strong { color: #f2f6ff; }
+    .stats { display: flex; gap: 11px; align-self: end; padding-bottom: 2px; }
+    .stat {
+      width: 95px; min-height: 88px; padding: 15px 12px; border: 1px solid rgba(203,218,244,.16);
+      border-radius: 16px; background: rgba(255,255,255,.055); backdrop-filter: blur(5px);
+    }
+    .stat strong { display: block; color: white; font-size: 26px; line-height: 1; letter-spacing: -.06em; }
+    .stat span { display: block; margin-top: 9px; color: #aab8d1; font-size: 10px; line-height: 1.25; }
+
+    .toolbar { margin: 28px 0 22px; padding: 16px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); box-shadow: var(--shadow); }
+    .toolbar-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .search-wrap { position: relative; flex: 1; max-width: 420px; }
+    .search-wrap svg { position: absolute; top: 50%; left: 14px; width: 17px; height: 17px; color: #8793a8; transform: translateY(-50%); pointer-events: none; }
+    #search {
+      width: 100%; height: 44px; padding: 0 14px 0 42px; border: 1px solid #e3e8f0; border-radius: 12px;
+      outline: none; background: #fbfcfe; color: var(--ink); font-size: 13px; transition: .2s ease;
+    }
+    #search::placeholder { color: #9aa5b7; }
+    #search:focus { border-color: #8aabff; box-shadow: 0 0 0 3px rgba(71,120,245,.1); background: white; }
+    .result-count { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .result-count strong { color: var(--ink); }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .filter-btn {
+      display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid #e5e9f0;
+      border-radius: 999px; background: #fff; color: #58667d; font-size: 11px; font-weight: 700; cursor: pointer;
+      transition: .18s ease;
+    }
+    .filter-btn:hover { border-color: #c3cee0; color: var(--ink); }
+    .filter-btn[aria-pressed="true"] { border-color: var(--navy); background: var(--navy); color: white; }
+    .filter-btn .filter-num { opacity: .7; font-size: 10px; }
+
+    .category-section { margin: 34px 0 0; scroll-margin-top: 18px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 14px; margin-bottom: 14px; }
+    .section-title-wrap { display: flex; align-items: center; gap: 11px; }
+    .section-icon {
+      display: grid; place-items: center; width: 39px; height: 39px; flex: none; border-radius: 13px;
+      background: var(--tint, #e9efff); font-size: 18px;
+    }
+    .section-heading h2 { margin: 0; font-size: 17px; letter-spacing: -.025em; }
+    .section-heading p { margin: 4px 0 0; color: var(--muted); font-size: 11px; }
+    .section-count { padding: 6px 10px; border: 1px solid #e4e8ef; border-radius: 999px; color: #66738a; background: white; font-size: 10px; font-weight: 700; white-space: nowrap; }
+    .repo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .repo-card {
+      min-width: 0; min-height: 168px; padding: 16px; display: flex; flex-direction: column;
+      border: 1px solid #e7ebf2; border-radius: 16px; background: white; color: inherit;
+      text-decoration: none; box-shadow: 0 4px 14px rgba(22,39,73,.025); transition: .2s ease;
+    }
+    .repo-card:hover { border-color: #c7d3e8; box-shadow: 0 12px 26px rgba(22,39,73,.09); transform: translateY(-3px); }
+    .card-top { display: flex; align-items: center; justify-content: space-between; }
+    .repo-icon {
+      width: 31px; height: 31px; display: grid; place-items: center; border-radius: 10px;
+      background: var(--tint, #edf2ff); color: var(--accent, #4778f5); font-size: 12px; font-weight: 850; letter-spacing: -.04em;
+    }
+    .external { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 8px; color: #9aa5b7; font-size: 16px; transition: .2s; }
+    .repo-card:hover .external { color: var(--blue); background: #f0f4ff; }
+    .repo-card h3 { margin: 13px 0 5px; overflow-wrap: anywhere; font-size: 14px; line-height: 1.3; letter-spacing: -.015em; }
+    .repo-card p { margin: 0; color: #6d7990; font-size: 11px; line-height: 1.55; }
+    .card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 14px; }
+    .repo-owner { overflow: hidden; color: #a0aabc; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+    .repo-open { color: #5774bd; font-size: 10px; font-weight: 750; white-space: nowrap; }
+    .empty-state { display: none; margin: 28px 0; padding: 34px 20px; border: 1px dashed #ccd5e3; border-radius: 16px; color: var(--muted); background: rgba(255,255,255,.6); text-align: center; font-size: 13px; }
+    .footer { display: flex; justify-content: space-between; gap: 18px; padding: 29px 2px 38px; margin-top: 37px; border-top: 1px solid #e2e7ef; color: #8994a7; font-size: 10px; line-height: 1.6; }
+    .footer a { color: #65748f; text-decoration: none; }
+    .footer a:hover { color: var(--blue); }
+
+    @media (max-width: 820px) {
+      .hero { grid-template-columns: 1fr; gap: 22px; padding: 35px; }
+      .stats { align-self: auto; }
+      .stat { width: 90px; min-height: 76px; }
+      .repo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 26px, 1160px); }
+      .topbar { height: 66px; }
+      .brand-copy span { display: none; }
+      .profile-link { padding: 9px 11px; font-size: 11px; }
+      .hero { min-height: auto; padding: 29px 23px; border-radius: 20px; }
+      .hero-copy p { font-size: 12px; }
+      .stats { gap: 8px; }
+      .stat { width: 83px; padding: 12px 10px; }
+      .toolbar { padding: 13px; margin-top: 20px; }
+      .toolbar-top { align-items: stretch; flex-direction: column; }
+      .search-wrap { max-width: none; }
+      .result-count { padding-left: 2px; }
+      .filters { gap: 7px; }
+      .filter-btn { padding: 8px 10px; font-size: 10px; }
+      .repo-grid { grid-template-columns: 1fr; gap: 9px; }
+      .repo-card { min-height: 150px; }
+      .section-heading h2 { font-size: 15px; }
+      .footer { flex-direction: column; gap: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
 </head>
 <body>
-<h2>Lớp: DELTA-L7 - Phương</h2>
-<div class="class-stats" id="classStats">Sĩ số: 0 | Có mặt: 0 | Vắng: 0</div>
-<div class="class-panel">
-<h3>Danh Sách: DELTA-L7 - Phương</h3>
-<br>
-<div class="add-student-box">
-<input type="text" id="newStudentName" placeholder="Dòng 1: Nhập họ và tên...">
-<input type="tel" id="newStudentPhone" placeholder="Dòng 2: Nhập số điện thoại...">
-<button class="btn-add" onclick="addNewStudent()">+ Thêm vào danh sách</button>
-</div>
-<div class="absent-section">
-<div class="absent-header">
-<span class="absent-title">DANH SÁCH VẮNG </span>
-<button class="copy-btn" onclick="copyAbsentList()">Copy</button>
-</div>
-<ul class="absent-list" id="absentList"><li><em>Chưa có học sinh vắng</em></li></ul>
-</div>
-<div class="student-list" id="studentList"></div>
-</div>
-<script>
-const defaultStudents = [
-    {
-        "id": 1,
-        "name": "Bùi Gia Hân",
-        "phone": "0904131591",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 2,
-        "name": "Nguyễn Thảo My",
-        "phone": "0983668552",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 3,
-        "name": "Trần Ngọc Huyền",
-        "phone": "0983395568",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 4,
-        "name": "Tống Đức Nghĩa",
-        "phone": "0915619905",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 5,
-        "name": "Nguyễn Trọng Khánh",
-        "phone": "0815673993",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 6,
-        "name": "Phạm Thanh Hằng",
-        "phone": "0838108998",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 7,
-        "name": "Nguyễn Thái Phong",
-        "phone": "0915157572",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 8,
-        "name": "Lê Gia Linh",
-        "phone": "0974665636",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 9,
-        "name": "Lê Vũ Trung Đức",
-        "phone": "0984850463",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 10,
-        "name": "Nguyễn Song Thư",
-        "phone": "0943279889",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 11,
-        "name": "Nguyễn Quốc Đạt",
-        "phone": "0936175096",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 12,
-        "name": "Ng Ngọc Phương Minh (Cún)",
-        "phone": "0374521390",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 13,
-        "name": "Đỗ Huyền Anh",
-        "phone": "0984699625",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 14,
-        "name": "Trần Tuấn Kiệt 4G",
-        "phone": "0345648886",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 15,
-        "name": "Dương Kiều Tran",
-        "phone": "0945121999",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 16,
-        "name": "Cao Hoàng Long",
-        "phone": "0918081885",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 17,
-        "name": "Nguyễn Phúc Tuệ Lâm",
-        "phone": "0936588226",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 18,
-        "name": "Đỗ Văn Dĩnh",
-        "phone": "0966043625",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 19,
-        "name": "Tạ Đình Phong",
-        "phone": "0387970057",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 20,
-        "name": "Vũ Tuấn Minh",
-        "phone": "0984180420",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 21,
-        "name": "Nguyễn Văn Gia Khánh",
-        "phone": "0376109158",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 22,
-        "name": "Đào Linh Nhi",
-        "phone": "0975587286",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 23,
-        "name": "Phước An",
-        "phone": "0902128922",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 24,
-        "name": "Trần Lê Duy Anh",
-        "phone": "0947847849",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 25,
-        "name": "Vũ Duy Anh",
-        "phone": "0977406698",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 26,
-        "name": "Phạm Minh Kiệt",
-        "phone": "0904282279",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 27,
-        "name": "Nguyễn Bảo Ngọc",
-        "phone": "0339912755",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 28,
-        "name": "Trần Thùy Dương",
-        "phone": "0983266299",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 29,
-        "name": "Tống Quang Anh",
-        "phone": "0977342412",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 30,
-        "name": "Bảo Anh",
-        "phone": "0362684852",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 31,
-        "name": "Đỗ Đăng Khoa",
-        "phone": "0984450622",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 32,
-        "name": "Tạ Thanh Trà",
-        "phone": "0987181127",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 33,
-        "name": "Nguyễn Ngọc Thùy Dung",
-        "phone": "0989411687",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 34,
-        "name": "Tạ Duy Anh",
-        "phone": "0337600829",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 35,
-        "name": "Nguyễn Hoàng Xuân Phúc",
-        "phone": "0792201259",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 36,
-        "name": "Đỗ Lê Đức Anh",
-        "phone": "0387314112",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 37,
-        "name": "Nguyễn Ngọc Kỳ An",
-        "phone": "0983760711",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 38,
-        "name": "Nguyễn Gia Huy",
-        "phone": "0978669864",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 39,
-        "name": "Trần Khôi Nguyên",
-        "phone": "0976924875",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 40,
-        "name": "Nguyễn Phúc Khang",
-        "phone": "0984735126",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 41,
-        "name": "Phạm Anh Kiệt",
-        "phone": "0989188339",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 42,
-        "name": "Nguyễn Hồng Hạnh",
-        "phone": "0983576525",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 43,
-        "name": "Nguyễn Hà Phương",
-        "phone": "0986566975",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 44,
-        "name": "Đinh Hoài An",
-        "phone": "0362261962",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 45,
-        "name": "Trần Quốc Anh",
-        "phone": "0902283566",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 46,
-        "name": "Nguyễn Ngọc Hải Phong",
-        "phone": "0903463385",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 47,
-        "name": "Nguyễn Quang Minh",
-        "phone": "0976726788",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 48,
-        "name": "Lê Ngọc Tường Vy",
-        "phone": "0975050306",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 49,
-        "name": "Khánh Linh",
-        "phone": "0987190339",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 50,
-        "name": "Phạm Nhật Nam",
-        "phone": "0974006002",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 51,
-        "name": "Khánh Chi",
-        "phone": "0964940889",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 52,
-        "name": "Nghiêm Nhật Đăng",
-        "phone": "0326489998",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 53,
-        "name": "Đỗ Thị Hiền Trang",
-        "phone": "0978048204",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 54,
-        "name": "Nguyễn Quốc Gia Minh",
-        "phone": "0915469236",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 55,
-        "name": "Khánh Vân",
-        "phone": "0372608066",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 56,
-        "name": "Nguyễn Linh Chi",
-        "phone": "0846259333",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 57,
-        "name": "Nguyễn Thiên Minh",
-        "phone": "0937717866",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 58,
-        "name": "Mai Khánh Ngọc",
-        "phone": "0988552864",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 59,
-        "name": "Lê Tuấn Kiệt",
-        "phone": "0987571949",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 60,
-        "name": "Vũ Quyết Thắng",
-        "phone": "0817072918",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 61,
-        "name": "Lê Mai",
-        "phone": "0983296831",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 62,
-        "name": "Lương Tấn Sang",
-        "phone": "0356330080",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 63,
-        "name": "Phạm Minh Khôi",
-        "phone": "0974992618",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 64,
-        "name": "Ng Phan Quang Vinh",
-        "phone": "0989651612",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 65,
-        "name": "Nguyễn Tường Vy",
-        "phone": "0912732155",
-        "status": "present",
-        "note": ""
-    },
-    {
-        "id": 66,
-        "name": "Nguyễn Đỗ Bảo Ngân",
-        "phone": "0943399389",
-        "status": "present",
-        "note": ""
-    }
-];
-let myClass = { name: "DELTA-L7 - Phương", students: [] };
-function displayPhone(p) { if(!p || p==='Chưa có') return 'Chưa có'; let c = p.replace(/\s+/g, ''); if(c.length===10) return c.substring(0,4)+' '+c.substring(4,7)+' '+c.substring(7); return p; }
-function loadData() { const saved = localStorage.getItem('classData_DELTA-L7%20-%20Ph%C6%B0%C6%A1ng'); if(saved) { myClass.students = JSON.parse(saved); } else { myClass.students = defaultStudents; saveData(); } }
-function saveData() { localStorage.setItem('classData_DELTA-L7%20-%20Ph%C6%B0%C6%A1ng', JSON.stringify(myClass.students)); }
-window.onload = function() { loadData(); renderStudentList(); renderAbsentList(); updateStats(); };
-function updateStats() { const total = myClass.students.length; const absent = myClass.students.filter(s => s.status === 'absent').length; const present = total - absent; document.getElementById('classStats').innerText = 'Sĩ số: ' + total + ' | Có mặt: ' + present + ' | Vắng: ' + absent; }
-function addNewStudent() { const nameInput = document.getElementById('newStudentName'); const phoneInput = document.getElementById('newStudentPhone'); const name = nameInput.value.trim(); const phone = phoneInput.value.trim().replace(/\s+/g, '') || 'Chưa có'; if(name === '') { alert('Vui lòng nhập tên!'); return; } const nextId = myClass.students.length > 0 ? Math.max(...myClass.students.map(s => s.id)) + 1 : 1; myClass.students.push({ id: nextId, name: name, phone: phone, status: 'present', note: '' }); saveData(); nameInput.value = ''; phoneInput.value = ''; renderStudentList(); renderAbsentList(); updateStats(); }
-function deleteStudent(id, name) { if(confirm('Bạn có chắc chắn muốn XÓA học sinh ' + name + '?')) { myClass.students = myClass.students.filter(s => s.id !== id); myClass.students.forEach((s, idx) => { s.id = idx + 1; }); saveData(); renderStudentList(); renderAbsentList(); updateStats(); } }
-function renderStudentList() { const container = document.getElementById('studentList'); container.innerHTML = ''; myClass.students.forEach(student => { const card = document.createElement('div'); card.className = 'student-card status-' + student.status; const absentActive = student.status === 'absent' ? 'active' : ''; const presentActive = student.status === 'present' ? 'active' : ''; card.innerHTML = '<div class="student-info-row"><div class="student-meta"><span class="student-name">' + student.id + '. ' + student.name + '</span><span class="student-phone">SĐT: ' + displayPhone(student.phone) + '</span></div><div class="student-actions-right"><button class="btn-call" onclick="callStudent(\'' + student.phone + '\')">📞</button><button class="btn-delete" onclick="deleteStudent(' + student.id + ', \'' + student.name + '\')">🗑️</button></div></div><div class="student-controls-row"><button class="btn-action btn-absent ' + absentActive + '" onclick="updateStatus(' + student.id + ', \'absent\')">Vắng</button><button class="btn-action btn-present ' + presentActive + '" onclick="updateStatus(' + student.id + ', \'present\')">Đi Học</button><select class="note-select" onchange="updateNote(' + student.id + ', this.value)"><option value="" ' + (student.note===''?'selected':'') + '>-- Ghi chú --</option><option value="***" ' + (student.note==='***'?'selected':'') + '>***</option><option value="Đi muộn" ' + (student.note==='Đi muộn' || student.note==='Muộn'?'selected':'') + '>Đi muộn</option><option value="Không nghe máy" ' + (student.note==='Không nghe máy'?'selected':'') + '>Không nghe máy</option><option value="Nghỉ hôm nay" ' + (student.note==='Nghỉ hôm nay'?'selected':'') + '>Nghỉ hôm nay</option><option value="Nghỉ tuần này" ' + (student.note==='Nghỉ tuần này'?'selected':'') + '>Nghỉ tuần này</option><option value="Khi nào đi học sẽ báo lại" ' + (student.note==='Khi nào đi học sẽ báo lại'?'selected':'') + '>Khi nào đi học sẽ báo lại</option><option value="Nghỉ hết tháng 7" ' + (student.note==='Nghỉ hết tháng 7'?'selected':'') + '>Nghỉ hết tháng 7</option><option value="Xin nghỉ hẳn" ' + (student.note==='Xin nghỉ hẳn'?'selected':'') + '>Xin nghỉ hẳn</option><option value="Ốm" ' + (student.note==='Ốm'?'selected':'') + '>Ốm đau</option></select></div>'; container.appendChild(card); }); }
-function updateStatus(id, status) { const student = myClass.students.find(s => s.id === id); student.status = status; saveData(); renderStudentList(); renderAbsentList(); updateStats(); }
-function updateNote(id, value) { const student = myClass.students.find(s => s.id === id); student.note = value; saveData(); renderAbsentList(); }
-function renderAbsentList() { const listContainer = document.getElementById('absentList'); listContainer.innerHTML = ''; const absentStudents = myClass.students.filter(s => s.status === 'absent'); if(absentStudents.length === 0) { listContainer.innerHTML = '<li><em>Chưa có học sinh vắng</em></li>'; return; } absentStudents.forEach(s => { const li = document.createElement('li'); const noteText = s.note ? ' (' + s.note + ')' : ' (Chưa rõ lý do)'; li.innerText = '• ' + s.name + noteText; listContainer.appendChild(li); }); }
-function copyAbsentList() { const total = myClass.students.length; const absentStudents = myClass.students.filter(s => s.status === 'absent'); const absentCount = absentStudents.length; const presentCount = total - absentCount; let text = 'LỚP: ' + myClass.name + '\n'; text += 'Sĩ số: ' + total + ' (Có mặt: ' + presentCount + ' | Vắng: ' + absentCount + ')\n-------------------------\nDanh sách vắng:\n'; if(absentCount === 0) { text += '-Lớp đi học đủ.'; } else { absentStudents.forEach((s, idx) => { const note = s.note ? ' (' + s.note + ')' : ''; text += (idx + 1) + '. ' + s.name + note + '\n'; }); } navigator.clipboard.writeText(text).then(() => { alert('Đã copy báo cáo lớp ' + myClass.name + '!'); }).catch(() => { alert('Lỗi copy.'); }); }
-function callStudent(phone) { if(phone === 'Chưa có') { alert('Chưa có SĐT!'); return; } window.location.href = 'tel:' + phone; }
-</script>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Về đầu trang">
+        <span class="brand-mark">H.</span>
+        <span class="brand-copy"><strong>THƯ VIỆN DỰ ÁN</strong><span>Danh mục GitHub cá nhân</span></span>
+      </a>
+      <a class="profile-link" href="https://github.com/hatubiu10" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.08c-3.1.67-3.76-1.32-3.76-1.32-.51-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.53 0-1.22.44-2.21 1.15-2.99-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.3-2.61 5.24-5.1 5.52.4.34.76 1.03.76 2.08v3.09c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
+        Xem hồ sơ GitHub <span aria-hidden="true">↗</span>
+      </a>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <div class="eyebrow">GITHUB · HATUBIU10</div>
+          <h1 id="page-title">Các dự án,<br>được sắp xếp gọn gàng.</h1>
+          <p>Một trang tổng hợp các repository và website bạn đã gửi. Chọn chủ đề hoặc nhập từ khóa để tìm nhanh dự án bạn cần.</p>
+        </div>
+        <div class="stats" aria-label="Thống kê danh mục">
+          <div class="stat"><strong>59</strong><span>liên kết</span></div>
+          <div class="stat"><strong>08</strong><span>nhóm chủ đề</span></div>
+          <div class="stat"><strong>01</strong><span>chủ sở hữu</span></div>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="Tìm kiếm và lọc dự án">
+        <div class="toolbar-top">
+          <label class="search-wrap" for="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.2 4.2"/></svg>
+            <input id="search" type="search" placeholder="Tìm theo tên dự án hoặc mô tả…" autocomplete="off">
+          </label>
+          <div class="result-count" id="result-count" aria-live="polite">Đang hiển thị <strong>59/59</strong> dự án</div>
+        </div>
+        <nav class="filters" aria-label="Lọc theo nhóm">
+          <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">Tất cả <span class="filter-num">59</span></button>
+          <button class="filter-btn" type="button" data-filter="education" aria-pressed="false">📚 Giáo dục <span class="filter-num">13</span></button>
+          <button class="filter-btn" type="button" data-filter="tools" aria-pressed="false">🧰 Công cụ, dữ liệu &amp; AI <span class="filter-num">19</span></button>
+          <button class="filter-btn" type="button" data-filter="design" aria-pressed="false">🎨 Hình ảnh &amp; thiết kế <span class="filter-num">6</span></button>
+          <button class="filter-btn" type="button" data-filter="lavie" aria-pressed="false">💧 Nước Lavie <span class="filter-num">6</span></button>
+          <button class="filter-btn" type="button" data-filter="apps" aria-pressed="false">🎮 Ứng dụng &amp; giải trí <span class="filter-num">4</span></button>
+          <button class="filter-btn" type="button" data-filter="personal" aria-pressed="false">✍️ Sổ tay &amp; sơ đồ <span class="filter-num">7</span></button>
+          <button class="filter-btn" type="button" data-filter="website" aria-pressed="false">🌐 Website <span class="filter-num">2</span></button>
+          <button class="filter-btn" type="button" data-filter="other" aria-pressed="false">🔎 Khác <span class="filter-num">2</span></button>
+        </nav>
+      </section>
+
+      <div id="project-list">
+        <section class="category-section" data-section="education" aria-labelledby="education-title">
+          <div class="section-heading">
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#e8f3ff">📚</span><div><h2 id="education-title">Giáo dục &amp; quản lý trường học</h2><p>Các dự án có vẻ liên quan đến lớp học, giáo viên và vận hành trường.</p></div></div>
+            <span class="section-count"><span class="visible-count">13</span> dự án</span>
+          </div>
+          <div class="repo-grid">
+            <a class="repo-card" href="https://github.com/hatubiu10/danhsachday168" target="_blank" rel="noopener noreferrer" data-category="education" data-search="danhsachday168 danh sách dạy phân công giảng dạy">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">D</span><span class="external" aria-hidden="true">↗</span></div><h3>danhsachday168</h3><p>Danh sách dạy hoặc phân công giảng dạy.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/lichnghihavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="lichnghihavi lịch nghỉ Havi">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">L</span><span class="external" aria-hidden="true">↗</span></div><h3>lichnghihavi</h3><p>Lịch nghỉ của Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/danhgiahocsinhhavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="danhgiahocsinhhavi đánh giá học sinh Havi">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">ĐG</span><span class="external" aria-hidden="true">↗</span></div><h3>danhgiahocsinhhavi</h3><p>Công cụ đánh giá học sinh Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/diemdanh" target="_blank" rel="noopener noreferrer" data-category="education" data-search="diemdanh điểm danh">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">ĐD</span><span class="external" aria-hidden="true">↗</span></div><h3>diemdanh</h3><p>Ứng dụng điểm danh.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/tinhluonghavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="tinhluonghavi tính lương Havi">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">TL</span><span class="external" aria-hidden="true">↗</span></div><h3>tinhluonghavi</h3><p>Công cụ tính lương cho Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/diemdanhchung" target="_blank" rel="noopener noreferrer" data-category="education" data-search="diemdanhchung điểm danh chung">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">ĐC</span><span class="external" aria-hidden="true">↗</span></div><h3>diemdanhchung</h3><p>Công cụ điểm danh chung.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/dsgiaovien" target="_blank" rel="noopener noreferrer" data-category="education" data-search="dsgiaovien danh sách giáo viên">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">GV</span><span class="external" aria-hidden="true">↗</span></div><h3>dsgiaovien</h3><p>Danh sách giáo viên.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/dieuhanhhavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="dieuhanhhavi điều hành Havi">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">ĐH</span><span class="external" aria-hidden="true">↗</span></div><h3>dieuhanhhavi</h3><p>Công cụ điều hành Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/lophoctienganhhavi" target="_blank" rel="noopener noreferrer" data-category="education" data-search="lophoctienganhhavi lớp học tiếng Anh Havi">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">EN</span><span class="external" aria-hidden="true">↗</span></div><h3>lophoctienganhhavi</h3><p>Lớp học tiếng Anh Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/xeplich" target="_blank" rel="noopener noreferrer" data-category="education" data-search="xeplich xếp lịch thời khóa biểu">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">XL</span><span class="external" aria-hidden="true">↗</span></div><h3>xeplich</h3><p>Công cụ xếp lịch.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/taofilelophoc" target="_blank" rel="noopener noreferrer" data-category="education" data-search="taofilelophoc tạo tệp lớp học">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">L</span><span class="external" aria-hidden="true">↗</span></div><h3>taofilelophoc</h3><p>Tiện ích tạo tệp cho lớp học.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/danhgiahocsinhhavi-test" target="_blank" rel="noopener noreferrer" data-category="education" data-search="danhgiahocsinhhavi-test đánh giá học sinh Havi thử nghiệm">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">TEST</span><span class="external" aria-hidden="true">↗</span></div><h3>danhgiahocsinhhavi-test</h3><p>Bản thử nghiệm công cụ đánh giá học sinh Havi.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/dslinklop" target="_blank" rel="noopener noreferrer" data-category="education" data-search="dslinklop danh sách link lớp">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">LINK</span><span class="external" aria-hidden="true">↗</span></div><h3>dslinklop</h3><p>Danh sách liên kết lớp học.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+          </div>
+        </section>
+
+        <section class="category-section" data-section="tools" aria-labelledby="tools-title">
+          <div class="section-heading">
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#f0eaff">🧰</span><div><h2 id="tools-title">Công cụ, dữ liệu &amp; AI</h2><p>Tiện ích về tệp, dữ liệu, lập trình, tự động hóa và AI.</p></div></div>
+            <span class="section-count"><span class="visible-count">19</span> dự án</span>
+          </div>
+          <div class="repo-grid">
+            <a class="repo-card" href="https://github.com/hatubiu10/csv" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="csv dữ liệu bảng tính">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">CSV</span><span class="external" aria-hidden="true">↗</span></div><h3>csv</h3><p>Tiện ích liên quan đến tệp hoặc dữ liệu CSV.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/danhsachtool" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="danhsachtool danh sách công cụ tools">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">DS</span><span class="external" aria-hidden="true">↗</span></div><h3>danhsachtool</h3><p>Danh sách các công cụ.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/htmltool" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="htmltool công cụ HTML web">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">HT</span><span class="external" aria-hidden="true">↗</span></div><h3>htmltool</h3><p>Công cụ hỗ trợ HTML.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/toolcode" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="toolcode công cụ lập trình mã nguồn code">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">&lt;/&gt;</span><span class="external" aria-hidden="true">↗</span></div><h3>toolcode</h3><p>Công cụ hỗ trợ viết hoặc xử lý mã.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/copy" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="copy sao chép tiện ích">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">CP</span><span class="external" aria-hidden="true">↗</span></div><h3>copy</h3><p>Tiện ích sao chép.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/vscodemini" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="vscodemini VS Code mini trình soạn thảo code">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">VS</span><span class="external" aria-hidden="true">↗</span></div><h3>vscodemini</h3><p>Trình soạn thảo hoặc tiện ích kiểu VS Code mini.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/cautruchtml" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="cautruchtml cấu trúc HTML web">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">HTML</span><span class="external" aria-hidden="true">↗</span></div><h3>cautruchtml</h3><p>Tài liệu hoặc tiện ích về cấu trúc HTML.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/filenoi" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="filenoi file nối ghép tệp">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">FN</span><span class="external" aria-hidden="true">↗</span></div><h3>filenoi</h3><p>Tiện ích nối hoặc ghép tệp (suy đoán theo tên).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/baomatfile" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="baomatfile bảo mật bảo vệ file tệp">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">BM</span><span class="external" aria-hidden="true">↗</span></div><h3>baomatfile</h3><p>Công cụ bảo vệ hoặc bảo mật tệp.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/toolexceltensdt" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="toolexceltensdt Excel tên số điện thoại">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">XL</span><span class="external" aria-hidden="true">↗</span></div><h3>toolexceltensdt</h3><p>Tiện ích Excel liên quan đến tên và số điện thoại.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/tooltonghop" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="tooltonghop tổng hợp tools">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">TH</span><span class="external" aria-hidden="true">↗</span></div><h3>tooltonghop</h3><p>Trang hoặc bộ tổng hợp các công cụ.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/taothu" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="taothu tạo thư viết thư">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">THƯ</span><span class="external" aria-hidden="true">↗</span></div><h3>taothu</h3><p>Công cụ tạo thư hoặc nội dung thư (theo tên).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/aitonghop" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="aitonghop trí tuệ nhân tạo">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">AI</span><span class="external" aria-hidden="true">↗</span></div><h3>aitonghop</h3><p>Dự án tổng hợp liên quan đến AI.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/taojsonmonan" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="taojsonmonan tạo dữ liệu món ăn">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">JSON</span><span class="external" aria-hidden="true">↗</span></div><h3>taojsonmonan</h3><p>Tạo dữ liệu JSON cho món ăn.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/taotaikhoan" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="taotaikhoan tạo tài khoản">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">TK</span><span class="external" aria-hidden="true">↗</span></div><h3>taotaikhoan</h3><p>Tiện ích tạo tài khoản.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/huongdancss" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="huongdancss hướng dẫn học CSS web stylesheet">
+              <div class="card-top"><span class="repo-icon" style="--tint:#f0eaff;--accent:#8056bf">CSS</span><span class="external" aria-hidden="true">↗</span></div><h3>huongdancss</h3><p>Hướng dẫn hoặc tài liệu học CSS (theo tên repository).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://hatbui10.github.io/200css/" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="200css 200 CSS học CSS tài liệu mẫu">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">CSS</span><span class="external" aria-hidden="true">↗</span></div><h3>200css</h3><p>Tài liệu hoặc bộ sưu tập nội dung CSS (theo tên đường dẫn).</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
+            </a>
+            <a class="repo-card" href="https://hatbui10.github.io/tooltaoweb/" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="tooltaoweb công cụ tạo web website">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">WEB</span><span class="external" aria-hidden="true">↗</span></div><h3>tooltaoweb</h3><p>Công cụ tạo website.</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
+            </a>
+            <a class="repo-card" href="https://hatbui10.github.io/mahoahtml1/" target="_blank" rel="noopener noreferrer" data-category="tools" data-search="mahoahtml1 mã hóa HTML encode">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">HTML</span><span class="external" aria-hidden="true">↗</span></div><h3>mahoahtml1</h3><p>Công cụ mã hóa HTML (theo tên đường dẫn).</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
+            </a>
+          </div>
+        </section>
+
+        <section class="category-section" data-section="design" aria-labelledby="design-title">
+          <div class="section-heading">
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff3e2">🎨</span><div><h2 id="design-title">Hình ảnh, chữ &amp; thiết kế</h2><p>Các repository có tên gợi đến hình ảnh, màu sắc hoặc trình bày.</p></div></div>
+            <span class="section-count"><span class="visible-count">6</span> dự án</span>
+          </div>
+          <div class="repo-grid">
+            <a class="repo-card" href="https://github.com/hatubiu10/fontchudep" target="_blank" rel="noopener noreferrer" data-category="design" data-search="fontchudep font chữ đẹp kiểu chữ">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">Aa</span><span class="external" aria-hidden="true">↗</span></div><h3>fontchudep</h3><p>Dự án về font chữ đẹp hoặc cách trình bày chữ.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/vongtron" target="_blank" rel="noopener noreferrer" data-category="design" data-search="vongtron vòng tròn hình tròn">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">◯</span><span class="external" aria-hidden="true">↗</span></div><h3>vongtron</h3><p>Tiện ích hoặc nội dung liên quan đến hình tròn.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/tachtheomau" target="_blank" rel="noopener noreferrer" data-category="design" data-search="tachtheomau tách theo màu">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">MÀU</span><span class="external" aria-hidden="true">↗</span></div><h3>tachtheomau</h3><p>Công cụ tách nội dung theo màu (theo tên repository).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/anhcomien" target="_blank" rel="noopener noreferrer" data-category="design" data-search="anhcomien ảnh hình ảnh">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">ẢNH</span><span class="external" aria-hidden="true">↗</span></div><h3>anhcomien</h3><p>Dự án liên quan đến hình ảnh; chức năng chưa rõ theo tên.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/tachnenanh34" target="_blank" rel="noopener noreferrer" data-category="design" data-search="tachnenanh34 tách nền ảnh xóa nền">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">PNG</span><span class="external" aria-hidden="true">↗</span></div><h3>tachnenanh34</h3><p>Công cụ tách hoặc xóa nền ảnh (theo tên).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/longvongtron" target="_blank" rel="noopener noreferrer" data-category="design" data-search="longvongtron vòng tròn hình dạng">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff3e2;--accent:#c17b2c">LV</span><span class="external" aria-hidden="true">↗</span></div><h3>longvongtron</h3><p>Dự án liên quan đến vòng tròn hoặc hình tròn (suy đoán theo tên).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+          </div>
+        </section>
+
+        <section class="category-section" data-section="lavie" aria-labelledby="lavie-title">
+          <div class="section-heading">
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#e5f8f4">💧</span><div><h2 id="lavie-title">Kinh doanh &amp; nước Lavie</h2><p>Các repository có tên liên quan đến Lavie, kho hàng hoặc đặt mua.</p></div></div>
+            <span class="section-count"><span class="visible-count">6</span> dự án</span>
+          </div>
+          <div class="repo-grid">
+            <a class="repo-card" href="https://github.com/hatubiu10/khonuoclavie" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="khonuoclavie kho nước Lavie quản lý kho">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e5f8f4;--accent:#169b81">K</span><span class="external" aria-hidden="true">↗</span></div><h3>khonuoclavie</h3><p>Dự án quản lý kho nước Lavie.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/datmuanuoclavie" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="datmuanuoclavie đặt mua nước Lavie">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e5f8f4;--accent:#169b81">ĐM</span><span class="external" aria-hidden="true">↗</span></div><h3>datmuanuoclavie</h3><p>Ứng dụng đặt mua nước Lavie.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/laviehungliengoikh" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="laviehungliengoikh Lavie Hùng Liên gọi khách">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e5f8f4;--accent:#169b81">LH</span><span class="external" aria-hidden="true">↗</span></div><h3>laviehungliengoikh</h3><p>Dự án liên quan đến Lavie Hùng Liên (theo tên repository).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/inhoadonlavie" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="inhoadonlavie in hóa đơn Lavie">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e5f8f4;--accent:#169b81">HD</span><span class="external" aria-hidden="true">↗</span></div><h3>inhoadonlavie</h3><p>Công cụ in hóa đơn liên quan đến Lavie.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/khonuoclaviehunglien" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="khonuoclaviehunglien kho nước Lavie Hùng Liên">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e5f8f4;--accent:#169b81">KH</span><span class="external" aria-hidden="true">↗</span></div><h3>khonuoclaviehunglien</h3><p>Dự án kho nước Lavie Hùng Liên (theo tên repository).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://hatbui10.github.io/sonhaplavie/" target="_blank" rel="noopener noreferrer" data-category="lavie" data-search="sonhaplavie sổ nhập liệu nhập hàng Lavie">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">SL</span><span class="external" aria-hidden="true">↗</span></div><h3>sonhaplavie</h3><p>Sổ nhập liệu hoặc quản lý nhập hàng Lavie (suy đoán theo tên).</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
+            </a>
+          </div>
+        </section>
+
+        <section class="category-section" data-section="apps" aria-labelledby="apps-title">
+          <div class="section-heading">
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff0e6">🎮</span><div><h2 id="apps-title">Ứng dụng &amp; giải trí</h2><p>Các dự án mang tính ứng dụng hoặc giải trí.</p></div></div>
+            <span class="section-count"><span class="visible-count">4</span> dự án</span>
+          </div>
+          <div class="repo-grid">
+            <a class="repo-card" href="https://github.com/hatubiu10/play168" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="play168 ứng dụng trò chơi giải trí">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff0e6;--accent:#e38b37">P</span><span class="external" aria-hidden="true">↗</span></div><h3>play168</h3><p>Dự án ứng dụng hoặc giải trí Play168.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/dayso168" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="dayso168 dãy số 168 ứng dụng">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff0e6;--accent:#e38b37">168</span><span class="external" aria-hidden="true">↗</span></div><h3>dayso168</h3><p>Dự án liên quan đến dãy số 168.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/skykid" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="skykid ứng dụng giải trí">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff0e6;--accent:#e38b37">SK</span><span class="external" aria-hidden="true">↗</span></div><h3>skykid</h3><p>Dự án Skykid; chức năng cụ thể cần xem trong repository.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/karaoke" target="_blank" rel="noopener noreferrer" data-category="apps" data-search="karaoke hát karaoke âm nhạc">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff0e6;--accent:#e38b37">K</span><span class="external" aria-hidden="true">↗</span></div><h3>karaoke</h3><p>Dự án hoặc ứng dụng karaoke.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+          </div>
+        </section>
+
+        <section class="category-section" data-section="personal" aria-labelledby="personal-title">
+          <div class="section-heading">
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#fff0f2">✍️</span><div><h2 id="personal-title">Sổ tay, nội dung &amp; sơ đồ</h2><p>Nhật ký, sổ tay và các dự án mang tính sơ đồ hoặc nội dung.</p></div></div>
+            <span class="section-count"><span class="visible-count">7</span> dự án</span>
+          </div>
+          <div class="repo-grid">
+            <a class="repo-card" href="https://github.com/hatubiu10/nhatky" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="nhatky nhật ký cá nhân">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">NK</span><span class="external" aria-hidden="true">↗</span></div><h3>nhatky</h3><p>Dự án nhật ký.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/sotaynauan1" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sotaynauan1 sổ tay nấu ăn công thức">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">NA</span><span class="external" aria-hidden="true">↗</span></div><h3>sotaynauan1</h3><p>Sổ tay nấu ăn.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/12yeutocuocdoi" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="12yeutocuocdoi 12 yếu tố cuộc đời nội dung">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">12</span><span class="external" aria-hidden="true">↗</span></div><h3>12yeutocuocdoi</h3><p>Dự án nội dung “12 yếu tố cuộc đời”.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/sodocuocdoi" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sodocuocdoi sơ đồ cuộc đời">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">SĐ</span><span class="external" aria-hidden="true">↗</span></div><h3>sodocuocdoi</h3><p>Sơ đồ cuộc đời (theo tên repository).</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/sotaynauan" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sotaynauan sổ tay nấu ăn công thức">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">NA</span><span class="external" aria-hidden="true">↗</span></div><h3>sotaynauan</h3><p>Sổ tay nấu ăn.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/soidaytroibuoc" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="soidaytroibuoc sợi dây trói buộc">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">SD</span><span class="external" aria-hidden="true">↗</span></div><h3>soidaytroibuoc</h3><p>Dự án nội dung có tên “sợi dây trói buộc”.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/sodocay" target="_blank" rel="noopener noreferrer" data-category="personal" data-search="sodocay sơ đồ cây">
+              <div class="card-top"><span class="repo-icon" style="--tint:#fff0f2;--accent:#d05d77">SC</span><span class="external" aria-hidden="true">↗</span></div><h3>sodocay</h3><p>Sơ đồ cây hoặc dự án liên quan đến sơ đồ cây.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+          </div>
+        </section>
+
+        <section class="category-section" data-section="website" aria-labelledby="website-title">
+          <div class="section-heading">
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#e8f3ff">🌐</span><div><h2 id="website-title">Website &amp; trang cá nhân</h2><p>Repository trang GitHub Pages.</p></div></div>
+            <span class="section-count"><span class="visible-count">2</span> dự án</span>
+          </div>
+          <div class="repo-grid">
+            <a class="repo-card" href="https://github.com/hatubiu10/hatubiu10.github.io" target="_blank" rel="noopener noreferrer" data-category="website" data-search="hatubiu10.github.io website trang cá nhân GitHub Pages">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">WEB</span><span class="external" aria-hidden="true">↗</span></div><h3>hatubiu10.github.io</h3><p>Repository website cá nhân trên GitHub Pages.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://hatbui10.github.io/60hoagiap/" target="_blank" rel="noopener noreferrer" data-category="website" data-search="60hoagiap 60 hoa giáp lịch can chi">
+              <div class="card-top"><span class="repo-icon" style="--tint:#e8f3ff;--accent:#397cc8">60</span><span class="external" aria-hidden="true">↗</span></div><h3>60 Hoa Giáp</h3><p>Trang tra cứu về 60 Hoa Giáp (theo tên đường dẫn).</p><div class="card-bottom"><span class="repo-owner">hatbui10.github.io</span><span class="repo-open">Mở trang ↗</span></div>
+            </a>
+          </div>
+        </section>
+
+        <section class="category-section" data-section="other" aria-labelledby="other-title">
+          <div class="section-heading">
+            <div class="section-title-wrap"><span class="section-icon" style="--tint:#edf0f5">🔎</span><div><h2 id="other-title">Khác / cần xem nội dung</h2><p>Tên repository chưa đủ rõ để phân loại chính xác.</p></div></div>
+            <span class="section-count"><span class="visible-count">2</span> dự án</span>
+          </div>
+          <div class="repo-grid">
+            <a class="repo-card" href="https://github.com/hatubiu10/linhai" target="_blank" rel="noopener noreferrer" data-category="other" data-search="linhai chưa rõ nội dung">
+              <div class="card-top"><span class="repo-icon" style="--tint:#edf0f5;--accent:#68758d">LH</span><span class="external" aria-hidden="true">↗</span></div><h3>linhai</h3><p>Chưa rõ chức năng theo tên; mở repository để xem chi tiết.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+            <a class="repo-card" href="https://github.com/hatubiu10/battu" target="_blank" rel="noopener noreferrer" data-category="other" data-search="battu chưa rõ chức năng">
+              <div class="card-top"><span class="repo-icon" style="--tint:#edf0f5;--accent:#68758d">BT</span><span class="external" aria-hidden="true">↗</span></div><h3>battu</h3><p>Tên repository chưa đủ rõ để xác định chức năng; mở repo để xem chi tiết.</p><div class="card-bottom"><span class="repo-owner">github.com/hatubiu10</span><span class="repo-open">Mở repository →</span></div>
+            </a>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="empty-state" id="empty-state">Không tìm thấy dự án phù hợp. Thử từ khóa khác nhé.</div>
+    </main>
+
+    <footer class="footer">
+      <span>Danh mục gồm 59 liên kết do bạn cung cấp: 54 repository và 5 website GitHub Pages.</span>
+      <span>Phân loại và mô tả được suy đoán theo tên repository; nội dung thực tế có thể khác. · <a href="https://github.com/hatubiu10" target="_blank" rel="noopener noreferrer">github.com/hatubiu10 ↗</a></span>
+    </footer>
+  </div>
+
+  <script>
+    (() => {
+      const search = document.getElementById('search');
+      const cards = [...document.querySelectorAll('.repo-card')];
+      const sections = [...document.querySelectorAll('.category-section')];
+      const buttons = [...document.querySelectorAll('.filter-btn')];
+      const resultCount = document.getElementById('result-count');
+      const emptyState = document.getElementById('empty-state');
+      let activeFilter = 'all';
+
+      function update() {
+        const query = search.value.trim().toLocaleLowerCase('vi');
+        let visibleTotal = 0;
+
+        cards.forEach(card => {
+          const matchesCategory = activeFilter === 'all' || card.dataset.category === activeFilter;
+          const haystack = (card.dataset.search + ' ' + card.innerText).toLocaleLowerCase('vi');
+          const matchesSearch = !query || haystack.includes(query);
+          const visible = matchesCategory && matchesSearch;
+          card.hidden = !visible;
+          if (visible) visibleTotal++;
+        });
+
+        sections.forEach(section => {
+          const visibleInSection = [...section.querySelectorAll('.repo-card')].filter(card => !card.hidden).length;
+          section.hidden = visibleInSection === 0;
+          section.querySelector('.visible-count').textContent = visibleInSection;
+        });
+
+        resultCount.innerHTML = `Đang hiển thị <strong>${visibleTotal}/${cards.length}</strong> dự án`;
+        emptyState.style.display = visibleTotal === 0 ? 'block' : 'none';
+      }
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          activeFilter = button.dataset.filter;
+          buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+          update();
+        });
+      });
+      search.addEventListener('input', update);
+      update();
+    })();
+  </script>
 </body>
 </html>
